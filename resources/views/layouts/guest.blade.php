@@ -15,8 +15,8 @@
     <!-- Styles -->
      <link rel="icon" href="{{ url('assets/images/logo.jpeg') }}" type="image/jpeg">
     
-    <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}?v={{ time() }}">
-    <script src="{{ url('assets/js/app.js') }}?v={{ time() }}"></script>
+    <link rel="stylesheet" href="{{ asset('assets/css/app1.css') }}?v={{ time() }}">
+    <script src="{{ url('assets/js/app.js') }}"></script>
 
 </head>
 

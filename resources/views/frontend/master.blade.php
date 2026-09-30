@@ -17,7 +17,7 @@
     <link rel="icon" href="{{ url('assets/images/logo.jpeg') }}" type="image/jpeg">
 
     <!-- Master & Shared CSS -->
-    <link rel="stylesheet" href="{{ url('assets/css/master.css') }}?v={{ time() }}">
+    <link rel="stylesheet" href="{{ url('assets/css/master1.css') }}?v={{ time() }}">
     <style>
         /* Seamless Topnav Overlay on Hero Background */
         .header {

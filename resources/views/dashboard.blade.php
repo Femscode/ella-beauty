@@ -12,7 +12,7 @@
     <div class="py-8">
         <div class="max-w-7xl mx-auto dash-page">
             @push('styles')
-                <link rel="stylesheet" href="{{ asset('assets/css/dashboard.css') }}?v={{ time() }}">
+                <link rel="stylesheet" href="{{ asset('assets/css/dashboard1.css') }}?v={{ time() }}">
             @endpush
 
             <div class="dash-stats-row">

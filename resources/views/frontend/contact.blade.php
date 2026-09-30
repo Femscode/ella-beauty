@@ -3,7 +3,7 @@
 @section('title', 'Contact Ella Beauty | Mobile Braiding & Studio Inquiries')
 
 @section('header')
-<link rel="stylesheet" href="{{ asset('assets/css/contact.css') }}?v={{ time() }}">
+<link rel="stylesheet" href="{{ asset('assets/css/contact1.css') }}?v={{ time() }}">
 <style>
     .contact-form-card {
         background: #FFFFFF;

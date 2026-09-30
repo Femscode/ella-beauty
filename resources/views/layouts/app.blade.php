@@ -13,8 +13,8 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
     <!-- Scripts -->
-    <link rel="stylesheet" href="{{ url('assets/css/app.css') }}?v={{ time() }}">
-    <script src="{{ url('assets/js/app.js') }}?v={{ time() }}"></script>
+    <link rel="stylesheet" href="{{ url('assets/css/app1.css') }}?v={{ time() }}">
+    <script src="{{ url('assets/js/app.js') }}"></script>
 
 </head>
 

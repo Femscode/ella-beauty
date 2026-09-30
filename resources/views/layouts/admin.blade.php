@@ -16,13 +16,13 @@
     <!-- Vite assets (Tailwind + App JS) -->
 <link rel="icon" href="{{ url('assets/images/logo.jpeg') }}" type="image/jpeg">
     
-    <link rel="stylesheet" href="{{ url('assets/css/app.css') }}?v={{ time() }}">
-    <link rel="stylesheet" href="{{ url('assets/css/tailwind.css') }}?v={{ time() }}">
-    <script src="{{ url('assets/js/app.js') }}?v={{ time() }}"></script>
-    <script src="{{ url('assets/js/tailwind.js') }}?v={{ time() }}"></script>
+    <link rel="stylesheet" href="{{ url('assets/css/app1.css') }}?v={{ time() }}">
+    <link rel="stylesheet" href="{{ url('assets/css/tailwind1.css') }}?v={{ time() }}">
+    <script src="{{ url('assets/js/app.js') }}"></script>
+    <script src="{{ url('assets/js/tailwind.js') }}"></script>
 
     <!-- Admin CSS -->
-    <link rel="stylesheet" href="{{ asset('assets/css/admin.css') }}?v={{ time() }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/admin1.css') }}?v={{ time() }}">
 
     <!-- Page-specific styles -->
     @stack('styles')
