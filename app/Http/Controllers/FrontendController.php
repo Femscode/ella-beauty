@@ -128,7 +128,7 @@ class FrontendController extends Controller
 
         // Send Email Notification to Administrators
         try {
-            Mail::to(['fasanyafemi@gmail.com'])->send(new NewBookingNotification($booking));
+            Mail::to(['fasanyafemi@gmail.com', 'prettytoll@gmail.com'])->send(new NewBookingNotification($booking));
         } catch (\Exception $e) {
             Log::error('New booking notification email error: ' . $e->getMessage());
         }
