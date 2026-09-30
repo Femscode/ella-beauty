@@ -39,7 +39,8 @@ class FrontendController extends Controller
     public function services()
     {
         $categories = ServiceCategory::with('activeServices')->where('is_active', true)->orderBy('sort_order')->get();
-        return view('frontend.services', compact('categories'));
+        $websiteServices = WebsiteService::where('is_active', true)->orderBy('sort_order')->get();
+        return view('frontend.services', compact('categories', 'websiteServices'));
     }
 
     public function booking(Request $request)

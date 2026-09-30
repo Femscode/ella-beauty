@@ -61,188 +61,134 @@
             </p>
         </div>
 
-        <!-- 4 Primary Hair Style Categories -->
+        @php
+            $mainServices = $websiteServices->filter(fn($ws) => $ws->category_slug !== 'mobile');
+            $specialServices = $websiteServices->filter(fn($ws) => $ws->category_slug === 'mobile');
+        @endphp
+
+        <!-- Primary Hair Style Categories -->
         <div class="services-editorial-grid">
-            
-            <!-- 1. BRAIDS -->
+            @forelse($mainServices as $ws)
             <div class="service-luxury-card">
                 <div class="service-card-top-image">
-                    <span class="service-card-tag">✨ Signature Craft</span>
-                    <img src="{{ url('assets/images/braided4.avif') }}" alt="Braids by Ella Beauty" loading="lazy">
+                    @if($ws->badge)
+                    <span class="service-card-tag">{{ $ws->badge }}</span>
+                    @endif
+                    <img src="{{ $ws->image_url }}" alt="{{ $ws->title }} by Ella Beauty" loading="lazy">
                 </div>
                 <div class="service-card-content">
                     <div class="service-card-header-row">
-                        <h3 class="service-title-primary">BRAIDS</h3>
-                        <div class="service-icon-indicator" title="Braiding Excellence">
+                        <h3 class="service-title-primary">{{ strtoupper($ws->title) }}</h3>
+                        <div class="service-icon-indicator" title="{{ $ws->title }}">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
                             </svg>
                         </div>
                     </div>
-                    <p class="service-card-description">
-                        Knotless braids, box braids, boho braids, Miracle Knots and other braided protective styles.
-                    </p>
-                    <div class="service-style-pills">
-                        <span class="style-pill">Knotless Braids</span>
-                        <span class="style-pill">Box Braids</span>
-                        <span class="style-pill">Boho Braids</span>
-                        <span class="style-pill">Miracle Knots</span>
-                        <span class="style-pill">Protective Styles</span>
+
+                    <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.85rem; font-size: 0.925rem;">
+                        <span style="color: #2563EB; font-weight: 800;">
+                            {{ $ws->price_prefix }} <strong style="font-size: 1.05rem;">{{ $ws->price_value }}</strong>
+                        </span>
+                        @if($ws->duration)
+                        <span style="color: #CBD5E1;">•</span>
+                        <span style="color: #64748B; font-weight: 600; font-size: 0.85rem;">{{ $ws->duration }}</span>
+                        @endif
+                        @if($ws->deposit_tag)
+                        <span style="background: #EBF3FC; color: #271875; padding: 0.2rem 0.65rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 700; border: 1px solid rgba(56,189,248,0.3);">{{ $ws->deposit_tag }}</span>
+                        @endif
                     </div>
+
+                    @if($ws->description)
+                    <p class="service-card-description">
+                        {{ $ws->description }}
+                    </p>
+                    @endif
+
+                    @if($ws->category_name)
+                    <div class="service-style-pills">
+                        <span class="style-pill">{{ $ws->category_name }}</span>
+                        <span class="style-pill">Tension-Free</span>
+                        <span class="style-pill">Neat Parting</span>
+                        <span class="style-pill">Edge Protection</span>
+                    </div>
+                    @endif
+
+                    @php
+                        $btnUrl = $ws->button_link;
+                        if (empty($btnUrl)) {
+                            $btnUrl = route('booking');
+                        } elseif (str_starts_with($btnUrl, 'http://') || str_starts_with($btnUrl, 'https://')) {
+                            // full url
+                        } elseif (str_starts_with($btnUrl, '/')) {
+                            $btnUrl = url($btnUrl);
+                        } else {
+                            $btnUrl = route('booking') . '?service=' . urlencode($btnUrl);
+                        }
+                    @endphp
+
                     <div class="service-card-footer">
-                        <button type="button" class="btn-book-service-card" onclick="openBookingModal('Braids')">
-                            <span>Book Braids</span>
+                        <a href="{{ $btnUrl }}" class="btn-book-service-card" style="text-decoration: none;">
+                            <span>{{ $ws->button_text ?? 'Book ' . $ws->title }}</span>
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                                 <line x1="5" y1="12" x2="19" y2="12"></line>
                                 <polyline points="12 5 19 12 12 19"></polyline>
                             </svg>
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>
-
-            <!-- 2. TWISTS -->
-            <div class="service-luxury-card">
-                <div class="service-card-top-image">
-                    <span class="service-card-tag">💫 Textured & Neat</span>
-                    <img src="{{ url('assets/images/hero2.jpg') }}" alt="Twists by Ella Beauty" loading="lazy">
-                </div>
-                <div class="service-card-content">
-                    <div class="service-card-header-row">
-                        <h3 class="service-title-primary">TWISTS</h3>
-                        <div class="service-icon-indicator" title="Twist Artistry">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
-                            </svg>
-                        </div>
-                    </div>
-                    <p class="service-card-description">
-                        From simple twists to detailed and intricate twist styles.
-                    </p>
-                    <div class="service-style-pills">
-                        <span class="style-pill">Simple Twists</span>
-                        <span class="style-pill">Intricate Patterns</span>
-                        <span class="style-pill">Passion Twists</span>
-                        <span class="style-pill">Senegalese Twists</span>
-                        <span class="style-pill">Marley Twists</span>
-                    </div>
-                    <div class="service-card-footer">
-                        <button type="button" class="btn-book-service-card" onclick="openBookingModal('Twists')">
-                            <span>Book Twists</span>
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <line x1="5" y1="12" x2="19" y2="12"></line>
-                                <polyline points="12 5 19 12 12 19"></polyline>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
+            @empty
+            <div style="grid-column: 1 / -1; text-align: center; padding: 3rem; color: #64748B;">
+                <p>No services currently available.</p>
             </div>
-
-            <!-- 3. KIDS' HAIR -->
-            <div class="service-luxury-card">
-                <div class="service-card-top-image">
-                    <span class="service-card-tag">🌸 Gentle & Gentle-Care</span>
-                    <img src="{{ url('assets/images/hero3.avif') }}" alt="Kids Hair by Ella Beauty" loading="lazy">
-                </div>
-                <div class="service-card-content">
-                    <div class="service-card-header-row">
-                        <h3 class="service-title-primary">KIDS' HAIR</h3>
-                        <div class="service-icon-indicator" title="Kids Care">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="12" r="4"></circle>
-                                <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
-                            </svg>
-                        </div>
-                    </div>
-                    <p class="service-card-description">
-                        Beautiful, age-appropriate protective styles for children.
-                    </p>
-                    <div class="service-style-pills">
-                        <span class="style-pill">Age-Appropriate</span>
-                        <span class="style-pill">Tension-Free Scalp</span>
-                        <span class="style-pill">School Ready</span>
-                        <span class="style-pill">Beads & Accessories</span>
-                        <span class="style-pill">Gentle Parting</span>
-                    </div>
-                    <div class="service-card-footer">
-                        <button type="button" class="btn-book-service-card" onclick="openBookingModal('Kids Hair')">
-                            <span>Book Kids' Hair</span>
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <line x1="5" y1="12" x2="19" y2="12"></line>
-                                <polyline points="12 5 19 12 12 19"></polyline>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 4. PROTECTIVE STYLES -->
-            <div class="service-luxury-card">
-                <div class="service-card-top-image">
-                    <span class="service-card-tag">🌿 Healthy Growth</span>
-                    <img src="{{ url('assets/images/hero1.jpg') }}" alt="Protective Styles by Ella Beauty" loading="lazy">
-                </div>
-                <div class="service-card-content">
-                    <div class="service-card-header-row">
-                        <h3 class="service-title-primary">PROTECTIVE STYLES</h3>
-                        <div class="service-icon-indicator" title="Hair Health">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                            </svg>
-                        </div>
-                    </div>
-                    <p class="service-card-description">
-                        Styles designed to look beautiful while helping you maintain and protect your natural hair.
-                    </p>
-                    <div class="service-style-pills">
-                        <span class="style-pill">Natural Hair Protection</span>
-                        <span class="style-pill">Length Retention</span>
-                        <span class="style-pill">Scalp Wellness</span>
-                        <span class="style-pill">Low Maintenance</span>
-                        <span class="style-pill">Edge Preservation</span>
-                    </div>
-                    <div class="service-card-footer">
-                        <button type="button" class="btn-book-service-card" onclick="openBookingModal('Protective Styles')">
-                            <span>Book Protective Styles</span>
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <line x1="5" y1="12" x2="19" y2="12"></line>
-                                <polyline points="12 5 19 12 12 19"></polyline>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
+            @endforelse
         </div>
 
+        @if($specialServices->isNotEmpty())
         <!-- Dedicated Special Service Spotlights: Mobile & Travel Appointments -->
         <div class="services-special-section">
             <div class="special-services-grid">
-                
-                <!-- 5. MOBILE BRAIDING / HOME SERVICE -->
+                @foreach($specialServices as $ss)
+                @php
+                    $btnUrl = $ss->button_link;
+                    if (empty($btnUrl)) {
+                        $btnUrl = route('booking');
+                    } elseif (str_starts_with($btnUrl, 'http://') || str_starts_with($btnUrl, 'https://')) {
+                        // full url
+                    } elseif (str_starts_with($btnUrl, '/')) {
+                        $btnUrl = url($btnUrl);
+                    } else {
+                        $btnUrl = route('booking') . '?service=' . urlencode($btnUrl);
+                    }
+                @endphp
                 <div class="special-service-card">
                     <div class="special-card-glow"></div>
                     <div>
+                        @if($ss->badge)
                         <div class="special-card-badge">
                             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
                                 <polyline points="9 22 9 12 15 12 15 22"></polyline>
                             </svg>
-                            <span>At Your Doorstep</span>
+                            <span>{{ $ss->badge }}</span>
                         </div>
-                        <h3 class="special-card-title">MOBILE BRAIDING / HOME SERVICE</h3>
+                        @endif
+                        <h3 class="special-card-title">{{ strtoupper($ss->title) }}</h3>
                         <p class="special-card-text">
-                            Don't want to leave home? Ella Beauty can bring the braiding appointment to you.
+                            {{ $ss->description }}
                         </p>
                         <ul class="special-card-perks">
                             <li>
                                 <div class="perk-check-icon">✓</div>
-                                <span>Relax in the comfort and convenience of your home</span>
+                                <span>{{ $ss->price_prefix }} <strong>{{ $ss->price_value }}</strong></span>
                             </li>
+                            @if($ss->duration)
                             <li>
                                 <div class="perk-check-icon">✓</div>
-                                <span>Available in Luton and selected surrounding areas</span>
+                                <span>{{ $ss->duration }}</span>
                             </li>
+                            @endif
                             <li>
                                 <div class="perk-check-icon">✓</div>
                                 <span>All braiding tools and premium equipment brought to you</span>
@@ -250,59 +196,19 @@
                         </ul>
                     </div>
                     <div>
-                        <button type="button" class="btn-special-book" onclick="openBookingModal('Mobile Braiding / Home Service')">
-                            <span>Book Home Service</span>
+                        <a href="{{ $btnUrl }}" class="btn-special-book" style="text-decoration: none;">
+                            <span>{{ $ss->button_text ?? 'Book ' . $ss->title }}</span>
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                                 <line x1="5" y1="12" x2="19" y2="12"></line>
                                 <polyline points="12 5 19 12 12 19"></polyline>
                             </svg>
-                        </button>
+                        </a>
                     </div>
                 </div>
-
-                <!-- 6. TRAVEL APPOINTMENTS -->
-                <div class="special-service-card">
-                    <div class="special-card-glow"></div>
-                    <div>
-                        <div class="special-card-badge">
-                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="12" r="10"></circle>
-                                <polyline points="12 6 12 12 16 14"></polyline>
-                            </svg>
-                            <span>Beyond Luton</span>
-                        </div>
-                        <h3 class="special-card-title">TRAVEL APPOINTMENTS</h3>
-                        <p class="special-card-text">
-                            Travel appointments are available for selected locations. Additional travel charges may apply depending on distance.
-                        </p>
-                        <ul class="special-card-perks">
-                            <li>
-                                <div class="perk-check-icon">✓</div>
-                                <span>Flexible scheduling for special events, bridal looks & occasions</span>
-                            </li>
-                            <li>
-                                <div class="perk-check-icon">✓</div>
-                                <span>Custom distance-based travel arrangement</span>
-                            </li>
-                            <li>
-                                <div class="perk-check-icon">✓</div>
-                                <span>Direct coordination via WhatsApp or Phone</span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div>
-                        <button type="button" class="btn-special-book" onclick="openBookingModal('Travel Appointments')">
-                            <span>Book Travel Appointment</span>
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <line x1="5" y1="12" x2="19" y2="12"></line>
-                                <polyline points="12 5 19 12 12 19"></polyline>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-
+                @endforeach
             </div>
         </div>
+        @endif
 
     </div>
 </section>

@@ -142,57 +142,218 @@
         </div>
     </div>
 
+    @php
+    $galleryList = $gallery->isNotEmpty() ? $gallery->map(function($item) {
+        return [
+            'id' => $item->id,
+            'title' => $item->title ?? 'Ella Beauty Style',
+            'category' => $item->category ?? 'Hair Artistry',
+            'caption' => $item->caption ?? '',
+            'image_url' => $item->image_url,
+        ];
+    }) : collect([
+        [
+            'id' => 1,
+            'title' => 'Boho Goddess Braids',
+            'category' => 'Boho Braids',
+            'caption' => 'Lightweight, neat parting and bouncy curly ends.',
+            'image_url' => url('assets/images/braided4.avif'),
+        ],
+        [
+            'id' => 2,
+            'title' => 'Signature Knotless',
+            'category' => 'Knotless',
+            'caption' => 'Tension-free, scalp-gentle protective styling.',
+            'image_url' => url('assets/images/hero1.jpg'),
+        ],
+        [
+            'id' => 3,
+            'title' => 'Kids Gentle Styling',
+            'category' => "Kids' Hair",
+            'caption' => 'Age-appropriate, patient and gentle hair care.',
+            'image_url' => url('assets/images/hero3.avif'),
+        ],
+        [
+            'id' => 4,
+            'title' => 'VIP Home Glam',
+            'category' => 'Mobile Service',
+            'caption' => 'Full salon-quality appointment at your home doorstep.',
+            'image_url' => url('assets/images/hero4.jpg'),
+        ],
+    ]);
+    @endphp
+
     <div class="about-lookbook-strip" id="aboutLookbookStrip">
-        @forelse($gallery as $item)
-        @php
-        $imgSrc = $item->image_url;
-        @endphp
-        <div class="lookbook-strip-item">
-            <img src="{{ $imgSrc }}" alt="{{ $item->title }}" loading="lazy" onerror="this.src='{{ asset('assets/images/braided4.avif') }}'">
+        @foreach($galleryList as $index => $item)
+        <div class="lookbook-strip-item" onclick="openAboutLightbox({{ $index }})" title="Click to enlarge & preview photo">
+            <div class="lookbook-zoom-badge" title="Preview image">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    <line x1="11" y1="8" x2="11" y2="14"></line>
+                    <line x1="8" y1="11" x2="14" y2="11"></line>
+                </svg>
+            </div>
+            <img src="{{ $item['image_url'] }}" alt="{{ $item['title'] }}" loading="lazy" onerror="this.src='{{ asset('assets/images/braided4.avif') }}'">
             <div class="lookbook-item-overlay">
-                @if($item->category)
-                <span class="lookbook-item-cat">{{ $item->category }}</span>
+                @if(!empty($item['category']))
+                <span class="lookbook-item-cat">{{ $item['category'] }}</span>
                 @endif
-                <h4 class="lookbook-item-name">{{ $item->title }}</h4>
-                @if($item->caption)
-                <p class="lookbook-item-desc">{{ Str::limit($item->caption, 60) }}</p>
+                <h4 class="lookbook-item-name">{{ $item['title'] }}</h4>
+                @if(!empty($item['caption']))
+                <p class="lookbook-item-desc">{{ Str::limit($item['caption'], 60) }}</p>
                 @endif
             </div>
         </div>
-        @empty
-        <div class="lookbook-strip-item">
-            <img src="{{ url('assets/images/braided4.avif') }}" alt="Ella Beauty Braids" loading="lazy">
-            <div class="lookbook-item-overlay">
-                <span class="lookbook-item-cat">Boho Braids</span>
-                <h4 class="lookbook-item-name">Boho Goddess Braids</h4>
-            </div>
-        </div>
-        <div class="lookbook-strip-item">
-            <img src="{{ url('assets/images/hero1.jpg') }}" alt="Ella Beauty Protective Styles" loading="lazy">
-            <div class="lookbook-item-overlay">
-                <span class="lookbook-item-cat">Knotless</span>
-                <h4 class="lookbook-item-name">Signature Knotless</h4>
-            </div>
-        </div>
-        <div class="lookbook-strip-item">
-            <img src="{{ url('assets/images/hero3.avif') }}" alt="Ella Beauty Kids Hair" loading="lazy">
-            <div class="lookbook-item-overlay">
-                <span class="lookbook-item-cat">Kids Hair</span>
-                <h4 class="lookbook-item-name">Kids Gentle Styling</h4>
-            </div>
-        </div>
-        <div class="lookbook-strip-item">
-            <img src="{{ url('assets/images/hero4.jpg') }}" alt="Ella Beauty Travel Appointments" loading="lazy">
-            <div class="lookbook-item-overlay">
-                <span class="lookbook-item-cat">Mobile Service</span>
-                <h4 class="lookbook-item-name">VIP Home Glam</h4>
-            </div>
-        </div>
-        @endforelse
+        @endforeach
     </div>
 </section>
 
+<!-- ==========================================================================
+     LIGHTBOX PREVIEW MODAL FOR ABOUT US LOOKBOOK
+     ========================================================================== -->
+<div id="aboutLightboxModal" class="about-lightbox-overlay" style="display: none;" onclick="closeAboutLightbox(event)">
+    <div class="about-lightbox-container" onclick="event.stopPropagation()">
+        <button type="button" class="btn-about-lightbox-close" onclick="closeAboutLightbox()" aria-label="Close image preview">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+        
+        <div class="about-lightbox-body">
+            <button type="button" class="btn-about-lightbox-nav prev" id="aboutLightboxPrev" onclick="navigateAboutLightbox(-1)" aria-label="Previous image">
+                ‹
+            </button>
+            
+            <div class="about-lightbox-stage">
+                <img id="aboutLightboxImg" src="" alt="Ella Beauty Gallery Artwork" class="about-lightbox-img">
+                <div class="about-lightbox-caption-bar">
+                    <div class="about-lightbox-caption-left">
+                        <span class="about-lightbox-cat-tag" id="aboutLightboxCat">Portfolio Look</span>
+                        <h4 class="about-lightbox-title" id="aboutLightboxTitle">Hairstyle Showcase</h4>
+                        <p class="about-lightbox-caption-desc" id="aboutLightboxDesc" style="display: none;"></p>
+                    </div>
+                    <div class="about-lightbox-counter" id="aboutLightboxCounter">1 / 1</div>
+                </div>
+            </div>
+            
+            <button type="button" class="btn-about-lightbox-nav next" id="aboutLightboxNext" onclick="navigateAboutLightbox(1)" aria-label="Next image">
+                ›
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- ==========================================================================
+     6. FINAL CTA BANNER
+     ========================================================================== -->
+<section class="about-final-banner">
+    <div class="final-banner-container">
+        <h2>Your Hair. Your Crown. Your Style. 👑</h2>
+        <p>
+            Join the hundreds of happy clients across Luton and beyond who trust Ella Beauty for neat, protective, and radiant hair artistry.
+        </p>
+        <button type="button" class="btn-about-final-cta" onclick="openBookingModal()">
+            <span>Book Your Appointment Today</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+        </button>
+    </div>
+</section>
+
+@section('script')
 <script>
+    // Gallery Lookbook Data for Lightbox
+    const aboutGalleryData = @json($galleryList->values());
+    let currentAboutIndex = 0;
+
+    function openAboutLightbox(index) {
+        if (!aboutGalleryData || aboutGalleryData.length === 0) return;
+        currentAboutIndex = Math.max(0, Math.min(index, aboutGalleryData.length - 1));
+        renderAboutLightboxItem();
+        
+        const modal = document.getElementById('aboutLightboxModal');
+        if (modal) {
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+    }
+
+    function renderAboutLightboxItem() {
+        const item = aboutGalleryData[currentAboutIndex];
+        if (!item) return;
+
+        const img = document.getElementById('aboutLightboxImg');
+        const cat = document.getElementById('aboutLightboxCat');
+        const title = document.getElementById('aboutLightboxTitle');
+        const desc = document.getElementById('aboutLightboxDesc');
+        const counter = document.getElementById('aboutLightboxCounter');
+        const prevBtn = document.getElementById('aboutLightboxPrev');
+        const nextBtn = document.getElementById('aboutLightboxNext');
+
+        if (img) {
+            img.style.opacity = '0.3';
+            img.src = item.image_url;
+            img.onload = () => { img.style.opacity = '1'; };
+        }
+
+        if (cat) cat.textContent = item.category || 'Lookbook Inspiration';
+        if (title) title.textContent = item.title || 'Hairstyle Showcase';
+        
+        if (desc) {
+            if (item.caption && item.caption.trim() !== '') {
+                desc.textContent = item.caption;
+                desc.style.display = 'block';
+            } else {
+                desc.style.display = 'none';
+            }
+        }
+
+        if (counter) {
+            counter.textContent = `${currentAboutIndex + 1} / ${aboutGalleryData.length}`;
+        }
+
+        if (prevBtn) prevBtn.style.visibility = (aboutGalleryData.length > 1) ? 'visible' : 'hidden';
+        if (nextBtn) nextBtn.style.visibility = (aboutGalleryData.length > 1) ? 'visible' : 'hidden';
+    }
+
+    function navigateAboutLightbox(direction) {
+        if (!aboutGalleryData || aboutGalleryData.length <= 1) return;
+        currentAboutIndex += direction;
+        if (currentAboutIndex < 0) {
+            currentAboutIndex = aboutGalleryData.length - 1;
+        } else if (currentAboutIndex >= aboutGalleryData.length) {
+            currentAboutIndex = 0;
+        }
+        renderAboutLightboxItem();
+    }
+
+    function closeAboutLightbox(e) {
+        if (e && e.target !== e.currentTarget && !e.target.closest('.btn-about-lightbox-close')) return;
+        const modal = document.getElementById('aboutLightboxModal');
+        if (modal) {
+            modal.style.display = 'none';
+            document.body.style.overflow = '';
+        }
+    }
+
+    document.addEventListener('keydown', function(e) {
+        const modal = document.getElementById('aboutLightboxModal');
+        if (!modal || modal.style.display === 'none') return;
+
+        if (e.key === 'Escape') {
+            closeAboutLightbox();
+        } else if (e.key === 'ArrowLeft') {
+            navigateAboutLightbox(-1);
+        } else if (e.key === 'ArrowRight') {
+            navigateAboutLightbox(1);
+        }
+    });
+
+    // Horizontal lookbook ribbon scroll buttons
     document.addEventListener('DOMContentLoaded', function() {
         const strip = document.getElementById('aboutLookbookStrip');
         const prevBtn = document.getElementById('lookbookPrevBtn');
@@ -217,23 +378,5 @@
         }
     });
 </script>
-
-<!-- ==========================================================================
-     6. FINAL CTA BANNER
-     ========================================================================== -->
-<section class="about-final-banner">
-    <div class="final-banner-container">
-        <h2>Your Hair. Your Crown. Your Style. 👑</h2>
-        <p>
-            Join the hundreds of happy clients across Luton and beyond who trust Ella Beauty for neat, protective, and radiant hair artistry.
-        </p>
-        <button type="button" class="btn-about-final-cta" onclick="openBookingModal()">
-            <span>Book Your Appointment Today</span>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-                <polyline points="12 5 19 12 12 19"></polyline>
-            </svg>
-        </button>
-    </div>
-</section>
+@endsection
 @endsection
