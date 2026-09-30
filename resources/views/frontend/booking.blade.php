@@ -78,7 +78,7 @@
                                 @foreach($categories as $category)
                                     @php
                                         $catGalleryImages = $category->galleryImages->take(3)->map(function($img) {
-                                            return filter_var($img->image_path, FILTER_VALIDATE_URL) ? $img->image_path : (str_starts_with($img->image_path, '/') ? url($img->image_path) : asset($img->image_path));
+                                            return $img->image_url;
                                         })->values();
                                     @endphp
                                     <optgroup label="{{ strtoupper($category->name) }}">

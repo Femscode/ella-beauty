@@ -133,7 +133,7 @@
                                     </div>
                                     @if($bk->payment_proof)
                                         <div style="margin-top: 4px;">
-                                            <a href="{{ url($bk->payment_proof) }}" target="_blank" class="status-pill status-paid" style="padding: 2px 7px; font-size: 0.68rem; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
+                                            <a href="{{ $bk->payment_proof_url }}" target="_blank" class="status-pill status-paid" style="padding: 2px 7px; font-size: 0.68rem; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
                                                 📸 View Proof
                                             </a>
                                         </div>

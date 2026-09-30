@@ -40,7 +40,7 @@ class WebsiteService extends Model
             return asset('assets/images/hero2.jpg');
         }
 
-        if (str_starts_with($this->image, 'http://') || str_starts_with($this->image, 'https://')) {
+        if (filter_var($this->image, FILTER_VALIDATE_URL) || str_starts_with($this->image, 'http://') || str_starts_with($this->image, 'https://')) {
             return $this->image;
         }
 
@@ -48,6 +48,12 @@ class WebsiteService extends Model
             return asset($this->image);
         }
 
-        return asset('storage/' . $this->image);
+        $relativePath = ltrim(str_replace('/storage/', '', $this->image), '/');
+
+        if ($storageUrl = env('STORAGE_URL')) {
+            return rtrim($storageUrl, '/') . '/' . $relativePath;
+        }
+
+        return \Illuminate\Support\Facades\Storage::disk('public')->url($relativePath);
     }
 }

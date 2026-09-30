@@ -113,7 +113,7 @@
         <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 18px;">
             @forelse($items as $item)
                 @php
-                    $imgSrc = filter_var($item->image_path, FILTER_VALIDATE_URL) ? $item->image_path : (str_starts_with($item->image_path, '/') ? url($item->image_path) : asset($item->image_path));
+                    $imgSrc = $item->image_url;
                 @endphp
                 <div style="border: 1.5px solid var(--adm-border); border-radius: 12px; overflow: hidden; background: #FFF; position: relative; display: flex; flex-direction: column; box-shadow: 0 2px 8px rgba(0,0,0,0.04); transition: transform 0.2s ease, border-color 0.2s ease;" class="gallery-card-item">
                     
@@ -463,7 +463,7 @@
         document.getElementById('editCaptionTextarea').value = item.caption || '';
         document.getElementById('editImageUrlInput').value = '';
 
-        const imgSrc = item.image_path.startsWith('http') ? item.image_path : (item.image_path.startsWith('/') ? item.image_path : '/' + item.image_path);
+        const imgSrc = item.image_url || (item.image_path.startsWith('http') ? item.image_path : (item.image_path.startsWith('/') ? item.image_path : '/' + item.image_path));
         document.getElementById('editImagePreview').src = imgSrc;
 
         modal.style.display = 'flex';

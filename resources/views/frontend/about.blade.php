@@ -145,7 +145,7 @@
     <div class="about-lookbook-strip" id="aboutLookbookStrip">
         @forelse($gallery as $item)
         @php
-        $imgSrc = filter_var($item->image_path, FILTER_VALIDATE_URL) ? $item->image_path : (str_starts_with($item->image_path, '/') ? url($item->image_path) : asset($item->image_path));
+        $imgSrc = $item->image_url;
         @endphp
         <div class="lookbook-strip-item">
             <img src="{{ $imgSrc }}" alt="{{ $item->title }}" loading="lazy" onerror="this.src='{{ asset('assets/images/braided4.avif') }}'">

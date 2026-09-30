@@ -89,7 +89,7 @@
                             <span style="color: #15803D; font-size: 0.85rem;">Our team is reviewing your proof and will verify your booking.</span>
                         </div>
                     </div>
-                    <a href="{{ url($booking->payment_proof) }}" target="_blank" style="display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; background: #15803D; color: #FFF; text-decoration: none; border-radius: 8px; font-weight: 700; font-size: 0.85rem;">
+                    <a href="{{ $booking->payment_proof_url }}" target="_blank" style="display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; background: #15803D; color: #FFF; text-decoration: none; border-radius: 8px; font-weight: 700; font-size: 0.85rem;">
                         <span>View Uploaded Proof</span> ↗
                     </a>
                 </div>

@@ -236,7 +236,7 @@
             <div class="proof-box" style="background: #ECFDF5; border-color: #A7F3D0; color: #065F46;">
                 <strong>📸 Payment Screenshot Uploaded:</strong><br>
                 The client attached proof of transfer. You can review the attached image in the admin panel or direct link below:<br>
-                <a href="{{ url($booking->payment_proof) }}" target="_blank" style="display: inline-block; margin-top: 8px; font-weight: 700; color: #047857;">👉 Click to View Payment Screenshot</a>
+                <a href="{{ $booking->payment_proof_url }}" target="_blank" style="display: inline-block; margin-top: 8px; font-weight: 700; color: #047857;">👉 Click to View Payment Screenshot</a>
             </div>
             @else
             <div class="proof-box">

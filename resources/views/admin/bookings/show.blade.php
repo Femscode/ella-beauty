@@ -155,19 +155,19 @@
                         <div style="text-align: center; padding: 24px; background: #F8FAFC; border-radius: 10px; border: 1px dashed #CBD5E1;">
                             <div style="font-size: 2.5rem; margin-bottom: 8px;">📄</div>
                             <div style="font-weight: 700; color: #1E293B; margin-bottom: 12px;">PDF Document Attached</div>
-                            <a href="{{ url($booking->payment_proof) }}" target="_blank" class="adm-btn adm-btn-primary adm-btn-sm">
+                            <a href="{{ $booking->payment_proof_url }}" target="_blank" class="adm-btn adm-btn-primary adm-btn-sm">
                                 View / Download PDF Receipt ↗
                             </a>
                         </div>
                     @else
                         <div style="border-radius: 10px; overflow: hidden; border: 1px solid var(--adm-border); background: #000; text-align: center; position: relative;">
-                            <a href="{{ url($booking->payment_proof) }}" target="_blank" title="Click to view full image">
-                                <img src="{{ url($booking->payment_proof) }}" alt="Proof of Payment" style="width: 100%; max-height: 280px; object-fit: contain; display: block; margin: 0 auto;">
+                            <a href="{{ $booking->payment_proof_url }}" target="_blank" title="Click to view full image">
+                                <img src="{{ $booking->payment_proof_url }}" alt="Proof of Payment" style="width: 100%; max-height: 280px; object-fit: contain; display: block; margin: 0 auto;">
                             </a>
                         </div>
                         <div style="margin-top: 12px; display: flex; justify-content: space-between; align-items: center;">
                             <span style="font-size: 0.8rem; color: var(--adm-text-muted);">Transferred to Revolut (56933694)</span>
-                            <a href="{{ url($booking->payment_proof) }}" target="_blank" class="adm-btn adm-btn-outline adm-btn-sm">
+                            <a href="{{ $booking->payment_proof_url }}" target="_blank" class="adm-btn adm-btn-outline adm-btn-sm">
                                 Open Full Size ↗
                             </a>
                         </div>

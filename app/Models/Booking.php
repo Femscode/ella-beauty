@@ -72,4 +72,26 @@ class Booking extends Model
     {
         return $this->belongsTo(Service::class);
     }
+
+    /**
+     * Get the resolved, absolute URL for payment screenshot / proof
+     */
+    public function getPaymentProofUrlAttribute(): ?string
+    {
+        if (empty($this->payment_proof)) {
+            return null;
+        }
+
+        if (filter_var($this->payment_proof, FILTER_VALIDATE_URL)) {
+            return $this->payment_proof;
+        }
+
+        $relativePath = ltrim(str_replace('/storage/', '', $this->payment_proof), '/');
+
+        if ($storageUrl = env('STORAGE_URL')) {
+            return rtrim($storageUrl, '/') . '/' . $relativePath;
+        }
+
+        return \Illuminate\Support\Facades\Storage::disk('public')->url($relativePath);
+    }
 }
