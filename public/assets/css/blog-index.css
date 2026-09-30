@@ -1,0 +1,111 @@
+/* Blog Index Page Scoped Styles */
+.blog-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1);
+}
+
+.blog-header {
+  margin-bottom: 1rem;
+}
+.blog-header h3 {
+  color: #111827;
+  font-weight: 600;
+}
+
+.blog-create-btn {
+  background: #271875;
+  color: #fff;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  box-shadow: 0 10px 15px -3px rgba(39,24,117,0.3), 0 4px 6px -4px rgba(39,24,117,0.2);
+  transition: transform 150ms ease, box-shadow 150ms ease, background 150ms ease;
+}
+.blog-create-btn:hover {
+  background: #3B82F6;
+  transform: translateY(-1px);
+  box-shadow: 0 15px 25px -5px rgba(59,130,246,0.35), 0 10px 10px -5px rgba(59,130,246,0.25);
+}
+
+.blog-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+.blog-table thead tr {
+  background-color: #f9fafb;
+}
+.blog-table th {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  color: #6b7280;
+  border-bottom: 1px solid #e5e7eb;
+}
+.blog-table tbody tr {
+  border-bottom: 1px solid #f1f5f9;
+}
+.blog-table tbody tr:hover {
+  background-color: #f8fafc;
+}
+.blog-table td {
+  vertical-align: middle;
+}
+
+.blog-cover {
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+}
+
+.blog-pagination {
+  background-color: #f9fafb;
+  border-top: 1px solid #e5e7eb;
+}
+
+/* Action buttons */
+.blog-action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.5rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1;
+  text-decoration: none;
+  transition: transform 150ms ease, box-shadow 150ms ease, background 150ms ease, color 150ms ease;
+  box-shadow: 0 6px 12px -4px rgba(0,0,0,0.15);
+}
+.blog-action-btn:hover {
+  transform: translateY(-1px);
+}
+
+.blog-action-view {
+  background: linear-gradient(135deg, #3730a3 0%, #4f46e5 100%);
+  color: #fff;
+}
+.blog-action-view:hover {
+  box-shadow: 0 12px 20px -6px rgba(79,70,229,0.35);
+}
+
+.blog-action-edit {
+  background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+  color: #fff;
+}
+.blog-action-edit:hover {
+  box-shadow: 0 12px 20px -6px rgba(2,132,199,0.35);
+}
+
+.blog-action-delete {
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+  color: #fff;
+}
+.blog-action-delete:hover {
+  box-shadow: 0 12px 20px -6px rgba(185,28,28,0.35);
+}
+
+.blog-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
