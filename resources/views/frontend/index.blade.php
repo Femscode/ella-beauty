@@ -119,7 +119,37 @@
         <div class="carousel-dot" onclick="goToHeroSlide(2)" aria-label="Slide 3"></div>
         <div class="carousel-dot" onclick="goToHeroSlide(3)" aria-label="Slide 4"></div>
     </div>
+
+    <!-- Scroll Indicator -->
+
 </section>
+
+<!-- ========================================================================
+     STATS / TRUST BAR
+     ======================================================================== -->
+<div class="stats-trust-bar" id="stats-bar">
+    <div class="container">
+        <div class="stats-trust-grid">
+            <div class="stat-trust-item">
+                <span class="stat-trust-num">5.0</span>
+                <span class="stat-trust-stars">★★★★★</span>
+                <span class="stat-trust-label">Google Rating</span>
+            </div>
+            <div class="stat-trust-item">
+                <span class="stat-trust-num">500+</span>
+                <span class="stat-trust-label">Happy Clients Served</span>
+            </div>
+            <div class="stat-trust-item">
+                <span class="stat-trust-num">25+</span>
+                <span class="stat-trust-label">Signature Styles</span>
+            </div>
+            <div class="stat-trust-item">
+                <span class="stat-trust-num">Mobile</span>
+                <span class="stat-trust-label">Home Service Available</span>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- ==========================================================================
      SERVICES & BESPOKE HAIRSTYLING MENU - LUXURY REDESIGN
@@ -142,13 +172,13 @@
         </div>
 
         @php
-            $uniqueCategories = $websiteServices->groupBy('category_slug')->map(function($items) {
-                return [
-                    'name' => $items->first()->category_name ?? 'General',
-                    'slug' => $items->first()->category_slug ?? 'general',
-                    'count' => $items->count(),
-                ];
-            });
+        $uniqueCategories = $websiteServices->groupBy('category_slug')->map(function($items) {
+        return [
+        'name' => $items->first()->category_name ?? 'General',
+        'slug' => $items->first()->category_slug ?? 'general',
+        'count' => $items->count(),
+        ];
+        });
         @endphp
 
         <!-- Service Category Tabs -->
@@ -157,11 +187,11 @@
                 <span>All Styles ({{ $websiteServices->count() }})</span>
             </button>
             @foreach($uniqueCategories as $slug => $cat)
-                @if($slug)
-                <button class="tab-btn" onclick="filterServices('{{ $slug }}', this)">
-                    <span>{{ $cat['name'] }}</span>
-                </button>
-                @endif
+            @if($slug)
+            <button class="tab-btn" onclick="filterServices('{{ $slug }}', this)">
+                <span>{{ $cat['name'] }}</span>
+            </button>
+            @endif
             @endforeach
         </div>
 
@@ -197,16 +227,16 @@
                     @endif
 
                     @php
-                        $btnUrl = $ws->button_link;
-                        if (empty($btnUrl)) {
-                            $btnUrl = route('booking');
-                        } elseif (str_starts_with($btnUrl, 'http://') || str_starts_with($btnUrl, 'https://')) {
-                            // full url
-                        } elseif (str_starts_with($btnUrl, '/')) {
-                            $btnUrl = url($btnUrl);
-                        } else {
-                            $btnUrl = route('booking') . '?service=' . urlencode($btnUrl);
-                        }
+                    $btnUrl = $ws->button_link;
+                    if (empty($btnUrl)) {
+                    $btnUrl = route('booking');
+                    } elseif (str_starts_with($btnUrl, 'http://') || str_starts_with($btnUrl, 'https://')) {
+                    // full url
+                    } elseif (str_starts_with($btnUrl, '/')) {
+                    $btnUrl = url($btnUrl);
+                    } else {
+                    $btnUrl = route('booking') . '?service=' . urlencode($btnUrl);
+                    }
                     @endphp
 
                     <a href="{{ $btnUrl }}" class="btn-book-service-card">
@@ -357,7 +387,7 @@
 
         <div class="experience-grid">
             <!-- Pillar 1 -->
-            <div class="experience-card">
+            <div class="experience-card" data-num="01" data-reveal data-reveal-delay="100">
                 <div class="exp-icon-wrap">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
@@ -370,7 +400,7 @@
             </div>
 
             <!-- Pillar 2 -->
-            <div class="experience-card">
+            <div class="experience-card" data-num="02" data-reveal data-reveal-delay="200">
                 <div class="exp-icon-wrap">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
@@ -384,7 +414,7 @@
             </div>
 
             <!-- Pillar 3 -->
-            <div class="experience-card">
+            <div class="experience-card" data-num="03" data-reveal data-reveal-delay="300">
                 <div class="exp-icon-wrap">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
@@ -397,7 +427,7 @@
             </div>
 
             <!-- Pillar 4 -->
-            <div class="experience-card">
+            <div class="experience-card" data-num="04" data-reveal data-reveal-delay="400">
                 <div class="exp-icon-wrap">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
@@ -787,8 +817,18 @@
      ========================================================================== -->
 <section class="section-cta">
     <div class="container">
-        <div class="vip-banner">
-            <span class="vip-badge">&#10024; Bespoke Braiding & Protective Care</span>
+        <div class="vip-banner" data-reveal>
+            <!-- Animated sparkle particles -->
+            <div class="vip-sparks" aria-hidden="true">
+                <div class="vip-spark"></div>
+                <div class="vip-spark"></div>
+                <div class="vip-spark"></div>
+                <div class="vip-spark"></div>
+                <div class="vip-spark"></div>
+                <div class="vip-spark"></div>
+                <div class="vip-spark"></div>
+                <div class="vip-spark"></div>
+            </div>
             <h2 class="vip-title">Ready for Your Next Hairstyle?</h2>
             <p class="vip-text">
                 Experience gentle, neat, and detailed braiding designed to protect your hair and elevate your look. Book an in-studio appointment or reserve a mobile home visit today.
@@ -802,7 +842,7 @@
                     </svg>
                     <span>Book Your Appointment</span>
                 </button>
-                <a href="https://wa.me/447123456789?text=Hello%20Ella%20Beauty!%20I%20would%20like%20to%20inquire%20about%20booking%20a%20braiding%20appointment." target="_blank" class="btn-vip-chat">
+                <a href="https://wa.me/447350166691?text=Hello%20Ella%20Beauty!%20I%20would%20like%20to%20inquire%20about%20booking%20a%20braiding%20appointment." target="_blank" class="btn-vip-chat">
                     <span>Chat on WhatsApp</span>
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M5 12h14M12 5l7 7-7 7" />
@@ -902,15 +942,42 @@
     function filterServices(category, btnElement) {
         document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
         btnElement.classList.add('active');
-
-        const cards = document.querySelectorAll('.service-card');
-        cards.forEach(card => {
-            if (category === 'all' || card.getAttribute('data-category') === category) {
-                card.style.display = 'flex';
-            } else {
-                card.style.display = 'none';
-            }
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.style.display = (category === 'all' || card.getAttribute('data-category') === category) ? 'flex' : 'none';
         });
     }
+
+    // ==========================================================================
+    // SCROLL REVEAL — IntersectionObserver
+    // ==========================================================================
+    (function() {
+        const revealEls = document.querySelectorAll('[data-reveal]');
+        if (!revealEls.length) return;
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.12,
+            rootMargin: '0px 0px -40px 0px'
+        });
+        revealEls.forEach(el => observer.observe(el));
+    })();
+
+    // Smooth scroll for scroll indicator
+    document.addEventListener('DOMContentLoaded', () => {
+        const scrollBtn = document.querySelector('.hero-scroll-indicator');
+        if (scrollBtn) {
+            scrollBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                document.getElementById('stats-bar')?.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        }
+    });
 </script>
 @endsection

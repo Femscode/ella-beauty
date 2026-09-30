@@ -9,6 +9,7 @@
      1. ABOUT HERO SECTION
      ========================================================================== -->
 <section class="about-hero-redesign">
+    <div class="about-hero-orb-secondary" aria-hidden="true"></div>
     <div class="about-hero-inner">
         <div class="about-pill-tag">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
@@ -22,10 +23,52 @@
         </h1>
 
         <p class="about-hero-subtitle">
-            Ella Beauty was created from a love for braiding, creativity and helping women and girls feel confident in their hair.
+            Ella Beauty was created from a pure passion for braiding, creativity, and helping every client feel confident, empowered, and in love with their crown.
         </p>
 
-
+        <!-- Hero Badges Grid -->
+        <div class="about-hero-badges-grid">
+            <div class="about-badge-item">
+                <span class="about-badge-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path>
+                        <line x1="16" y1="8" x2="2" y2="22"></line>
+                        <line x1="17.5" y1="15" x2="9" y2="15"></line>
+                    </svg>
+                </span>
+                <span class="about-badge-label">Tension-Free Grip</span>
+            </div>
+            <div class="about-badge-item">
+                <span class="about-badge-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                        <circle cx="12" cy="10" r="3"></circle>
+                    </svg>
+                </span>
+                <span class="about-badge-label">Luton &amp; Mobile Visits</span>
+            </div>
+            <div class="about-badge-item">
+                <span class="about-badge-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="6" cy="6" r="3"></circle>
+                        <circle cx="6" cy="18" r="3"></circle>
+                        <line x1="20" y1="4" x2="8.12" y2="15.88"></line>
+                        <line x1="14.47" y1="14.48" x2="20" y2="20"></line>
+                        <line x1="8.12" y1="8.12" x2="12" y2="12"></line>
+                    </svg>
+                </span>
+                <span class="about-badge-label">Bespoke Styling</span>
+            </div>
+            <div class="about-badge-item">
+                <span class="about-badge-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        <path d="m9 12 2 2 4-4"></path>
+                    </svg>
+                </span>
+                <span class="about-badge-label">Edge Health Care</span>
+            </div>
+        </div>
     </div>
 </section>
 
@@ -37,7 +80,7 @@
         <div class="story-layout-grid">
 
             <!-- Visual Left Column -->
-            <div class="story-image-column">
+            <div class="story-image-column" data-reveal>
                 <div class="story-image-container">
                     <img src="{{ url('assets/images/hero2.jpg') }}" alt="Ella Beauty Braiding Artistry" class="story-main-photo">
                 </div>
@@ -51,14 +94,14 @@
             </div>
 
             <!-- Text Right Column -->
-            <div class="story-text-column">
-                <span class="section-tag-eyebrow">Our Philosophy & Craft</span>
-                <h2 class="story-text-heading">Every Hairstyle Created With Heart & Precision</h2>
+            <div class="story-text-column" data-reveal data-reveal-delay="200">
+                <span class="section-tag-eyebrow">Our Philosophy &amp; Craft</span>
+                <h2 class="story-text-heading">Every Hairstyle Created With <span>Heart &amp; Precision</span></h2>
                 <p class="story-text-paragraph">
-                    Every hairstyle is created with attention to detail — from the parting and neatness to the finishing touches.
+                    Every hairstyle is created with immaculate attention to detail — from clean, symmetrical parting and gentle scalp grip to flawless finishing touches.
                 </p>
                 <p class="story-text-paragraph">
-                    Whether you're looking for a simple protective style, a holiday look, a special occasion hairstyle or something you've had saved on your phone for weeks, the goal is simple: <strong>to make you love your hair. ✨</strong>
+                    Whether you're looking for a simple protective style, a holiday look, a special occasion hairstyle, or something you've had saved on your phone for weeks, our goal is simple: <strong>to make you love your crown. ✨</strong>
                 </p>
 
                 <div class="crown-callout-card">
@@ -76,35 +119,59 @@
      ========================================================================== -->
 <section class="about-values-section">
     <div class="container">
-        <div class="section-intro-header">
+        <div class="section-intro-header" data-reveal>
             <span class="section-badge-eyebrow">What Sets Us Apart</span>
             <h2 class="section-main-heading">The Ella Beauty <span>Difference</span></h2>
             <p class="section-main-desc">
-                Dedicated standards of care, comfort, neatness, and healthy hair protection.
+                Dedicated standards of comfort, neatness, tension-free edge protection, and healthy hair care.
             </p>
         </div>
 
         <div class="values-grid">
-            <div class="value-card">
-                <div class="value-icon-box">✨</div>
+            <div class="value-card" data-reveal data-reveal-delay="100">
+                <div class="value-icon-box">
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="22" y1="12" x2="18" y2="12"></line>
+                        <line x1="6" y1="12" x2="2" y2="12"></line>
+                        <line x1="12" y1="6" x2="12" y2="2"></line>
+                        <line x1="12" y1="22" x2="12" y2="18"></line>
+                    </svg>
+                </div>
                 <h4>Precision Parting</h4>
                 <p>Clean, crisp lines and consistent sectioning that elevate every look to salon perfection.</p>
             </div>
 
-            <div class="value-card">
-                <div class="value-icon-box">🌿</div>
+            <div class="value-card" data-reveal data-reveal-delay="200">
+                <div class="value-icon-box">
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                    </svg>
+                </div>
                 <h4>Tension-Free Edges</h4>
                 <p>Gentle on your scalp, protecting your edges and promoting natural hair health and growth.</p>
             </div>
 
-            <div class="value-card">
-                <div class="value-icon-box">🎨</div>
+            <div class="value-card" data-reveal data-reveal-delay="300">
+                <div class="value-icon-box">
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="13.5" cy="6.5" r=".5" fill="currentColor"></circle>
+                        <circle cx="17.5" cy="10.5" r=".5" fill="currentColor"></circle>
+                        <circle cx="8.5" cy="7.5" r=".5" fill="currentColor"></circle>
+                        <circle cx="6.5" cy="12.5" r=".5" fill="currentColor"></circle>
+                        <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.563-2.512 5.563-5.563C22 6.5 17.5 2 12 2z"></path>
+                    </svg>
+                </div>
                 <h4>Creative Customization</h4>
                 <p>Bring in any inspiration photo or dream look; we bring it to life with bespoke craftsmanship.</p>
             </div>
 
-            <div class="value-card">
-                <div class="value-icon-box">👑</div>
+            <div class="value-card" data-reveal data-reveal-delay="400">
+                <div class="value-icon-box">
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m2 4 3 12h14l3-12-6 7-4-7-4 7-6-7zm3 16h14"></path>
+                    </svg>
+                </div>
                 <h4>Confidence First</h4>
                 <p>We ensure you leave each session feeling empowered, refreshed, and in love with your crown.</p>
             </div>
@@ -113,17 +180,12 @@
 </section>
 
 <!-- ==========================================================================
-     4. SERVICE COVERAGE & LOCATION SPOTLIGHT
-     ========================================================================== -->
-
-
-<!-- ==========================================================================
-     5. SIGNATURE LOOKBOOK RIBBON (SCROLLABLE & DYNAMIC FROM ADMIN)
+     4. SIGNATURE LOOKBOOK RIBBON (SCROLLABLE & DYNAMIC FROM ADMIN)
      ========================================================================== -->
 <section class="about-lookbook-section">
-    <div class="lookbook-section-header">
+    <div class="lookbook-section-header" data-reveal>
         <div class="lookbook-header-left">
-            <span class="lookbook-badge">PORTFOLIO & LOOKBOOK</span>
+            <span class="lookbook-badge">PORTFOLIO &amp; LOOKBOOK</span>
             <h3 class="lookbook-title">Our Recent <em>Hair Artistry</em></h3>
         </div>
         <div class="lookbook-scroll-nav">
@@ -246,10 +308,10 @@
 </div>
 
 <!-- ==========================================================================
-     6. FINAL CTA BANNER
+     5. FINAL CTA BANNER
      ========================================================================== -->
 <section class="about-final-banner">
-    <div class="final-banner-container">
+    <div class="final-banner-container" data-reveal>
         <h2>Your Hair. Your Crown. Your Style. 👑</h2>
         <p>
             Join the hundreds of happy clients across Luton and beyond who trust Ella Beauty for neat, protective, and radiant hair artistry.
@@ -263,9 +325,28 @@
         </button>
     </div>
 </section>
+@endsection
 
 @section('script')
 <script>
+    // Scroll reveal
+    (function() {
+        const revealEls = document.querySelectorAll('[data-reveal]');
+        if (!revealEls.length) return;
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.12,
+            rootMargin: '0px 0px -40px 0px'
+        });
+        revealEls.forEach(el => observer.observe(el));
+    })();
+
     // Gallery Lookbook Data for Lightbox
     const aboutGalleryData = @json($galleryList->values());
     let currentAboutIndex = 0;
@@ -378,5 +459,4 @@
         }
     });
 </script>
-@endsection
 @endsection

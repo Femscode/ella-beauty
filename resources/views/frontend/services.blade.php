@@ -9,6 +9,7 @@
      1. LUXURY SERVICES HERO SECTION
      ========================================================================== -->
 <section class="services-hero-redesign">
+    <div class="hero-orb-secondary" aria-hidden="true"></div>
     <div class="services-hero-inner">
         <div class="services-pill-tag">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
@@ -53,7 +54,7 @@
     <div class="services-catalog-container">
         
         <!-- Header -->
-        <div class="section-intro-header">
+        <div class="section-intro-header" data-reveal>
             <span class="section-badge-eyebrow">Signature Offerings</span>
             <h2 class="section-main-heading">Crafted With <span>Heart & Precision</span></h2>
             <p class="section-main-desc">
@@ -252,7 +253,7 @@
      4. FINAL CALL TO ACTION
      ========================================================================== -->
 <section class="services-final-banner">
-    <div class="final-banner-inner">
+    <div class="final-banner-inner" data-reveal>
         <h2>Your Hair. Your Crown. Your Style. 👑</h2>
         <p>
             Ready to book your next protective style with Ella Beauty? Reserve your appointment now and experience the difference.
@@ -266,4 +267,39 @@
         </button>
     </div>
 </section>
+@endsection
+
+@section('script')
+<script>
+    // Scroll reveal
+    (function() {
+        const revealEls = document.querySelectorAll('[data-reveal]');
+        if (!revealEls.length) return;
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.12,
+            rootMargin: '0px 0px -40px 0px'
+        });
+        revealEls.forEach(el => observer.observe(el));
+    })();
+
+    // Smooth scroll for explore button
+    document.addEventListener('DOMContentLoaded', () => {
+        const exploreBtn = document.querySelector('.btn-hero-secondary');
+        if (exploreBtn) {
+            exploreBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                document.getElementById('servicesGrid')?.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        }
+    });
+</script>
 @endsection
