@@ -149,12 +149,7 @@ class FrontendController extends Controller
         $booking->payment_proof = '/storage/' . $path;
         $booking->save();
 
-        // Dispatch updated notification to admins
-        try {
-            Mail::to(['fasanyafemi@gmail.com', 'prettytoll@gmail.com'])->send(new NewBookingNotification($booking));
-        } catch (\Exception $e) {
-            Log::error('Payment proof update notification email error: ' . $e->getMessage());
-        }
+
 
         return redirect()->route('booking.confirmation', ['reference' => $booking->booking_reference])
             ->with('success', 'Payment proof screenshot uploaded successfully! Our team is reviewing and will confirm your booking shortly.');
