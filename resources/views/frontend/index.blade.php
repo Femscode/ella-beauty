@@ -133,7 +133,7 @@
             <div class="stat-trust-item">
                 <span class="stat-trust-num">5.0</span>
                 <span class="stat-trust-stars">★★★★★</span>
-                <span class="stat-trust-label">Google Rating</span>
+                <span class="stat-trust-label">Client Rating</span>
             </div>
             <div class="stat-trust-item">
                 <span class="stat-trust-num">500+</span>
@@ -308,7 +308,7 @@
 
                     <!-- Option 1: With Gel -->
                     <div class="gel-option-card gel-card-with">
-                        <div class="gel-card-ribbon">Sleek & Defined</div>
+
                         <div class="gel-card-header">
                             <div class="gel-card-icon-wrap with-gel">
                                 <span class="gel-emoji">🌿</span>
@@ -333,7 +333,7 @@
 
                     <!-- Option 2: Without Gel -->
                     <div class="gel-option-card gel-card-without">
-                        <div class="gel-card-ribbon natural">Soft & Natural</div>
+
                         <div class="gel-card-header">
                             <div class="gel-card-icon-wrap without-gel">
                                 <span class="gel-emoji">🌿</span>
