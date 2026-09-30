@@ -12,7 +12,7 @@
     <div class="booking-hero-inner">
         <div class="booking-pill-badge">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
             </svg>
             <span>Ella Beauty Scheduling & Menu</span>
         </div>
@@ -52,7 +52,7 @@
 <section class="booking-main-section" id="appointmentForm">
     <div class="container">
         <div class="booking-layout-grid">
-            
+
             <!-- Left Side: Interactive Appointment Form with Live Price Calculation -->
             <div class="booking-form-card" id="formWrapper">
                 <div class="booking-form-header">
@@ -67,47 +67,47 @@
                     <input type="hidden" name="service_name" id="hiddenServiceName" value="">
                     <input type="hidden" name="total_price" id="hiddenTotalPrice" value="0">
                     <input type="hidden" name="appointment_time" id="selectedDedicatedTime" value="09:30 AM">
-                    
+
                     <!-- 1. Hairstyle Selection -->
                     <div class="booking-field-group">
                         <label class="booking-input-label" for="bookHairstyle">1. Select Hairstyle & Length *</label>
                         <select id="bookHairstyle" class="booking-select-control" onchange="updatePriceCalculation()" required>
                             <option value="" disabled selected>-- Select a Style from the Menu --</option>
-                            
+
                             @if(isset($categories) && $categories->count() > 0)
-                                @foreach($categories as $category)
-                                    @php
-                                        $catGalleryImages = $category->galleryImages->take(3)->map(function($img) {
-                                            return $img->image_url;
-                                        })->values();
-                                    @endphp
-                                    <optgroup label="{{ strtoupper($category->name) }}">
-                                        @foreach($category->activeServices as $service)
-                                            @php
-                                                $serviceImages = $catGalleryImages;
-                                                if ($serviceImages->isEmpty() && $service->image) {
-                                                    $serviceImages = collect([filter_var($service->image, FILTER_VALIDATE_URL) ? $service->image : (str_starts_with($service->image, '/') ? url($service->image) : asset($service->image))]);
-                                                }
-                                            @endphp
-                                            <option value="{{ $service->id }}" 
-                                                    data-id="{{ $service->id }}"
-                                                    data-name="{{ $service->name }}"
-                                                    data-category="{{ $category->name }}"
-                                                    data-price="{{ $service->price }}" 
-                                                    data-time="{{ $service->duration_hours }}" 
-                                                    data-ext="{{ $service->hair_extensions_note ?? 'Braiding hair details provided upon booking.' }}"
-                                                    data-images="{{ json_encode($serviceImages) }}">
-                                                {{ $service->name }} (£{{ number_format($service->price, 2) }} • {{ $service->duration_hours }})
-                                            </option>
-                                        @endforeach
-                                    </optgroup>
+                            @foreach($categories as $category)
+                            @php
+                            $catGalleryImages = $category->galleryImages->take(3)->map(function($img) {
+                            return $img->image_url;
+                            })->values();
+                            @endphp
+                            <optgroup label="{{ strtoupper($category->name) }}">
+                                @foreach($category->activeServices as $service)
+                                @php
+                                $serviceImages = $catGalleryImages;
+                                if ($serviceImages->isEmpty() && $service->image) {
+                                $serviceImages = collect([filter_var($service->image, FILTER_VALIDATE_URL) ? $service->image : (str_starts_with($service->image, '/') ? url($service->image) : asset($service->image))]);
+                                }
+                                @endphp
+                                <option value="{{ $service->id }}"
+                                    data-id="{{ $service->id }}"
+                                    data-name="{{ $service->name }}"
+                                    data-category="{{ $category->name }}"
+                                    data-price="{{ $service->price }}"
+                                    data-time="{{ $service->duration_hours }}"
+                                    data-ext="{{ $service->hair_extensions_note ?? 'Braiding hair details provided upon booking.' }}"
+                                    data-images="{{ json_encode($serviceImages) }}">
+                                    {{ $service->name }} (£{{ number_format($service->price, 2) }} • {{ $service->duration_hours }})
+                                </option>
                                 @endforeach
+                            </optgroup>
+                            @endforeach
                             @else
-                                <optgroup label="BOHO BRAIDS">
-                                    <option value="1" data-id="1" data-name="Small Boho Braids — Bob / Shoulder Length" data-category="Boho Braids" data-price="120" data-time="7 hours" data-ext="Braiding hair included. Human hair bulk bundle is not included." data-images='["{{ url("assets/images/braided4.avif") }}"]'>Small Boho Braids — Bob / Shoulder Length (£120.00 • 7 hrs)</option>
-                                    <option value="2" data-id="2" data-name="Small Boho Braids — Mid-Back Length" data-category="Boho Braids" data-price="140" data-time="8 hours" data-ext="Braiding hair included." data-images='["{{ url("assets/images/hero1.jpg") }}"]'>Small Boho Braids — Mid-Back Length (£140.00 • 8 hrs)</option>
-                                    <option value="3" data-id="3" data-name="Small Boho Braids — Waist Length" data-category="Boho Braids" data-price="180" data-time="10 hours" data-ext="Braiding hair included." data-images='["{{ url("assets/images/hero4.jpg") }}"]'>Small Boho Braids — Waist Length (£180.00 • 10 hrs)</option>
-                                </optgroup>
+                            <optgroup label="BOHO BRAIDS">
+                                <option value="1" data-id="1" data-name="Small Boho Braids — Bob / Shoulder Length" data-category="Boho Braids" data-price="120" data-time="7 hours" data-ext="Braiding hair included. Human hair bulk bundle is not included." data-images='["{{ url("assets/images/braided4.avif") }}"]'>Small Boho Braids — Bob / Shoulder Length (£120.00 • 7 hrs)</option>
+                                <option value="2" data-id="2" data-name="Small Boho Braids — Mid-Back Length" data-category="Boho Braids" data-price="140" data-time="8 hours" data-ext="Braiding hair included." data-images='["{{ url("assets/images/hero1.jpg") }}"]'>Small Boho Braids — Mid-Back Length (£140.00 • 8 hrs)</option>
+                                <option value="3" data-id="3" data-name="Small Boho Braids — Waist Length" data-category="Boho Braids" data-price="180" data-time="10 hours" data-ext="Braiding hair included." data-images='["{{ url("assets/images/hero4.jpg") }}"]'>Small Boho Braids — Waist Length (£180.00 • 10 hrs)</option>
+                            </optgroup>
                             @endif
                         </select>
                     </div>
@@ -138,21 +138,21 @@
                             </div>
                         </div>
 
-                        <!-- Hair Extension Note -->
-                        <div class="selected-note-row" id="summaryExtensionsNoteRow">
-                            <span class="note-icon">💡</span>
-                            <span class="note-text" id="summaryExtensionsNote">Braiding hair details provided upon booking.</span>
-                        </div>
-
-                        <!-- Attached Category Lookbook Preview (Up to 3 Images with Click-to-Preview) -->
+                        <!-- Attached Category Lookbook Preview (2 per row with Click-to-Preview) -->
                         <div class="selected-gallery-section" id="serviceGalleryPreview" style="display: none;">
                             <div class="gallery-preview-label-row">
-                                <span class="gallery-preview-label">📸 Lookbook Inspiration (Click photo to preview)</span>
-                                <span class="gallery-preview-count" id="galleryPreviewCount">3 Photos</span>
+                                <span class="gallery-preview-label">📸 Style Lookbook (Click photo to enlarge)</span>
+                                <span class="gallery-preview-count" id="galleryPreviewCount">Photos</span>
                             </div>
                             <div class="selected-gallery-thumbs" id="servicePreviewGrid">
                                 <!-- Thumbnails injected via JS -->
                             </div>
+                        </div>
+
+                        <!-- Hair Extension Note -->
+                        <div class="selected-note-row" id="summaryExtensionsNoteRow">
+                            <span class="note-icon">💡</span>
+                            <span class="note-text" id="summaryExtensionsNote">Braiding hair details provided upon booking.</span>
                         </div>
                     </div>
 
@@ -244,13 +244,13 @@
                         <div class="bank-details-card">
                             <div class="bank-card-top">
                                 <div class="bank-brand">
-                                    <div class="revolut-logo-badge">R</div>
+
                                     <div>
                                         <div class="bank-name-label">Revolut Bank Transfer</div>
                                         <div class="account-holder-name">Toluwalope Ajala</div>
                                     </div>
                                 </div>
-                                <span class="bank-verified-tag">✓ Official Account</span>
+                                <span class="bank-verified-tag">Official Account</span>
                             </div>
 
                             <div class="bank-details-grid">
@@ -353,7 +353,7 @@
                     <p style="color: #475569; max-width: 480px; margin: 0 auto 1.5rem; line-height: 1.7;">
                         Thank you, <strong id="confirmedNameDisplay">Client</strong>! Your booking request has been dispatched. Our team will contact you via WhatsApp/SMS with your 30% deposit confirmation details.
                     </p>
-                    <a href="https://wa.me/447123456789" target="_blank" class="btn-submit-appointment" style="max-width: 320px; margin: 0 auto; background: #25D366; text-decoration: none;">
+                    <a href="https://wa.me/447350166691" target="_blank" class="btn-submit-appointment" style="max-width: 320px; margin: 0 auto; background: #25D366; text-decoration: none;">
                         <span>Chat on WhatsApp</span>
                     </a>
                 </div>
@@ -409,6 +409,15 @@
                 <div class="checklist-advisory-note">
                     If you're unsure about anything, please ask before paying your deposit. Once your deposit has been received and your appointment confirmed, you are agreeing to Ella Beauty's booking policies.
                 </div>
+
+                <div style="margin-top: 1.5rem; text-align: center;">
+                    <a href="https://wa.me/447350166691?text=Hello%20Ella%20Beauty!%20I%20have%20an%20enquiry%20before%20booking%20my%20appointment." target="_blank" class="btn-checklist-whatsapp" style="display: inline-flex; align-items: center; justify-content: center; gap: 0.65rem; padding: 0.95rem 1.85rem; width: 100%; background: linear-gradient(135deg, #25D366 0%, #128C7E 100%); color: #FFFFFF; font-weight: 800; font-size: 0.95rem; border-radius: 9999px; text-decoration: none; box-shadow: 0 8px 24px rgba(37, 211, 102, 0.35); transition: all 0.3s ease;">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.275.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824zm-3.423-14.416c-6.627 0-12 5.373-12 12 0 2.155.57 4.175 1.564 5.924l-1.564 5.904 6.082-1.595c1.701.936 3.655 1.471 5.738 1.471 6.627 0 12-5.373 12-12 0-6.628-5.373-12-12-12z" />
+                        </svg>
+                        <span>Ask a Question on WhatsApp</span>
+                    </a>
+                </div>
             </div>
 
         </div>
@@ -420,7 +429,7 @@
      ========================================================================== -->
 <section class="pricing-catalog-section" id="pricingMenu">
     <div class="pricing-catalog-container">
-        
+
         <div class="catalog-section-header">
             <span class="policies-badge-eyebrow">Official Menu</span>
             <h2 class="policies-section-title">Complete <span>Pricing & Services</span></h2>
@@ -445,7 +454,7 @@
 
         <!-- Pricing Cards Grid -->
         <div class="pricing-cards-grid">
-            
+
             <!-- 1. BOHO BRAIDS -->
             <div class="price-card-item" data-cat="boho">
                 <div>
@@ -1125,7 +1134,7 @@
      ========================================================================== -->
 <section class="booking-policies-section" id="policiesSection">
     <div class="policies-container">
-        
+
         <div class="policies-section-header">
             <span class="policies-badge-eyebrow">Terms & Standards</span>
             <h2 class="policies-section-title">Ella Beauty <span>Policies</span></h2>
@@ -1135,7 +1144,7 @@
         </div>
 
         <div class="policies-cards-grid">
-            
+
             <!-- Policy 1: 30% Deposit & Payments -->
             <div class="policy-card-item">
                 <div class="policy-card-top">
@@ -1293,12 +1302,12 @@
                 <line x1="6" y1="6" x2="18" y2="18"></line>
             </svg>
         </button>
-        
+
         <div class="booking-lightbox-body">
             <button type="button" class="btn-lightbox-nav prev" id="lightboxPrevBtn" onclick="navigateLightbox(-1)" aria-label="Previous Lookbook image">
                 ‹
             </button>
-            
+
             <div class="lightbox-image-stage">
                 <img id="lightboxMainImage" src="" alt="Lookbook Artwork Preview" class="lightbox-main-img">
                 <div class="lightbox-info-overlay">
@@ -1309,7 +1318,7 @@
                     <div class="lightbox-counter-pill" id="lightboxCounter">1 / 3</div>
                 </div>
             </div>
-            
+
             <button type="button" class="btn-lightbox-nav next" id="lightboxNextBtn" onclick="navigateLightbox(1)" aria-label="Next Lookbook image">
                 ›
             </button>
@@ -1330,7 +1339,7 @@
     function updatePriceCalculation() {
         const selectEl = document.getElementById('bookHairstyle');
         const selectedOption = selectEl.options[selectEl.selectedIndex];
-        
+
         if (!selectedOption || !selectedOption.dataset.price) {
             document.getElementById('livePriceBox').style.display = 'none';
             if (document.getElementById('depositSectionAmount')) {
@@ -1371,7 +1380,7 @@
         document.getElementById('summaryTotalPrice').textContent = `£${price.toFixed(2)}`;
         document.getElementById('summaryDepositPrice').textContent = `£${deposit}`;
         document.getElementById('summaryBalancePrice').textContent = `£${balance}`;
-        
+
         const extNoteEl = document.getElementById('summaryExtensionsNote');
         const extRowEl = document.getElementById('summaryExtensionsNoteRow');
         if (extNoteEl && extRowEl) {
@@ -1391,7 +1400,7 @@
         const previewWrap = document.getElementById('serviceGalleryPreview');
         const previewGrid = document.getElementById('servicePreviewGrid');
         const countBadge = document.getElementById('galleryPreviewCount');
-        
+
         currentGalleryImages = [];
         try {
             if (selectedOption.dataset.images) {
@@ -1404,13 +1413,13 @@
         if (previewWrap && previewGrid) {
             if (currentGalleryImages && currentGalleryImages.length > 0) {
                 previewGrid.innerHTML = '';
-                const maxThree = currentGalleryImages.slice(0, 3);
-                
+                const maxPhotos = currentGalleryImages.slice(0, 4);
+
                 if (countBadge) {
-                    countBadge.textContent = `${maxThree.length} Photo${maxThree.length > 1 ? 's' : ''}`;
+                    countBadge.textContent = `${maxPhotos.length} Photo${maxPhotos.length > 1 ? 's' : ''}`;
                 }
 
-                maxThree.forEach((imgUrl, i) => {
+                maxPhotos.forEach((imgUrl, i) => {
                     const card = document.createElement('div');
                     card.className = 'selected-gallery-thumb-item';
                     card.title = 'Click to enlarge and preview';
@@ -1474,7 +1483,9 @@
             imgEl.style.opacity = '0';
             setTimeout(() => {
                 imgEl.src = currentSrc;
-                imgEl.onload = () => { imgEl.style.opacity = '1'; };
+                imgEl.onload = () => {
+                    imgEl.style.opacity = '1';
+                };
                 imgEl.onerror = () => {
                     imgEl.src = "{{ asset('assets/images/braided4.avif') }}";
                     imgEl.style.opacity = '1';
@@ -1530,7 +1541,9 @@
             document.body.removeChild(input);
             const orig = btn.innerText;
             btn.innerText = 'Copied! ✓';
-            setTimeout(() => { btn.innerText = orig; }, 2000);
+            setTimeout(() => {
+                btn.innerText = orig;
+            }, 2000);
         }
     }
 
@@ -1561,7 +1574,7 @@
         let matched = false;
         for (let i = 0; i < selectEl.options.length; i++) {
             const opt = selectEl.options[i];
-            if (opt.value == optionValue || 
+            if (opt.value == optionValue ||
                 (opt.dataset.name && opt.dataset.name.toLowerCase().includes(optionValue.toLowerCase())) ||
                 opt.text.toLowerCase().includes(optionValue.toLowerCase())) {
                 selectEl.selectedIndex = i;
@@ -1569,17 +1582,19 @@
                 break;
             }
         }
-        
+
         if (!matched && optionValue) {
             selectEl.value = optionValue;
         }
 
         updatePriceCalculation();
-        
+
         // Scroll smoothly to appointment form
         const formEl = document.getElementById('appointmentForm');
         if (formEl) {
-            formEl.scrollIntoView({ behavior: 'smooth' });
+            formEl.scrollIntoView({
+                behavior: 'smooth'
+            });
         }
     }
 
@@ -1612,7 +1627,7 @@
             if (selectEl) {
                 for (let i = 0; i < selectEl.options.length; i++) {
                     const opt = selectEl.options[i];
-                    if (opt.value == serviceParam || 
+                    if (opt.value == serviceParam ||
                         opt.dataset.id == serviceParam ||
                         opt.text.toLowerCase().includes(serviceParam.toLowerCase())) {
                         selectEl.selectedIndex = i;
