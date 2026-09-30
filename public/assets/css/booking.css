@@ -275,10 +275,6 @@
     margin: 0;
 }
 
-.booking-field-group {
-    margin-bottom: 1.5rem;
-}
-
 .booking-field-row {
     display: grid;
     grid-template-columns: 1fr;
@@ -301,10 +297,20 @@
     letter-spacing: 0.02em;
 }
 
+.booking-field-group {
+    margin-bottom: 1.5rem;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    min-width: 0;
+}
+
 .booking-input-control,
 .booking-select-control,
 .booking-textarea-control {
-    width: 100%;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
     padding: 0.875rem 1.2rem;
     background: #F8FAFC;
     border: 1.5px solid #DCE7F6;
@@ -314,6 +320,24 @@
     font-family: inherit;
     outline: none;
     transition: all 0.3s ease;
+    display: block;
+}
+
+input[type="date"].booking-input-control {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    display: block;
+    min-height: 50px;
+    line-height: 1.5;
+    background-color: #F8FAFC;
+    color: #0F172A;
+}
+
+input[type="date"].booking-input-control::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    padding: 4px;
+    filter: invert(0.2);
 }
 
 .booking-input-control:focus,

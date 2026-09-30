@@ -114,7 +114,7 @@
                         <a href="{{ route('home') }}#reviews" class="mobile-nav-link" onclick="toggleMobileMenu()">Client Reviews <span>→</span></a>
                         <a href="{{ route('home') }}#faq" class="mobile-nav-link" onclick="toggleMobileMenu()">Salon FAQ <span>→</span></a>
                         <a href="{{ route('booking') }}" class="mobile-contact-btn" onclick="toggleMobileMenu();">
-                            ✨ Book An Appointment Now
+                            Book An Appointment Now
                         </a>
                     </div>
                 </div>

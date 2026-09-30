@@ -142,12 +142,11 @@
                         <div class="selected-gallery-section" id="serviceGalleryPreview" style="display: none;">
                             <div class="gallery-preview-label-row">
                                 <span class="gallery-preview-label">📸 Style Lookbook (Click photo to enlarge)</span>
-                                <span class="gallery-preview-count" id="galleryPreviewCount">Photos</span>
                             </div>
                             <div class="selected-gallery-thumbs" id="servicePreviewGrid">
                                 <!-- Thumbnails injected via JS -->
                             </div>
-                        </div>
+                        </div><br>
 
                         <!-- Hair Extension Note -->
                         <div class="selected-note-row" id="summaryExtensionsNoteRow">
