@@ -1,7 +1,7 @@
 @extends('frontend.master')
 
 @section('header')
-    <link rel="stylesheet" href="{{ url('assets/css/portfolio.css') }}">
+    <link rel="stylesheet" href="{{ url('assets/css/portfolio.css') }}?v={{ time() }}">
 @endsection
 
 @section('content')
