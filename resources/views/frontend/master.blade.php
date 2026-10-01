@@ -182,7 +182,7 @@
                         <div class="form-group">
                             <label class="form-label" for="bookLocation">3. Service Location</label>
                             <select id="bookLocation" class="form-select" required>
-                                <option value="Salon Studio (Luton)">Salon Studio (Luton)</option>
+                                <option value="Salon Studio (Luton)">Home Salon (Luton)</option>
                                 <option value="Mobile Braiding / Home Service (Luton & Local)">Mobile Braiding / Home Service (Luton & Local)</option>
                                 <option value="Travel Appointment (Selected Regions)">Travel Appointment (Selected Regions)</option>
                             </select>

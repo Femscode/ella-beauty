@@ -13,7 +13,7 @@
     <div class="services-hero-inner">
         <div class="services-pill-tag">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
             </svg>
             <span>Ella Beauty Artistry</span>
         </div>
@@ -52,7 +52,7 @@
      ========================================================================== -->
 <section class="services-catalog-section" id="servicesGrid">
     <div class="services-catalog-container">
-        
+
         <!-- Header -->
         <div class="section-intro-header" data-reveal>
             <span class="section-badge-eyebrow">Signature Offerings</span>
@@ -63,8 +63,8 @@
         </div>
 
         @php
-            $mainServices = $websiteServices->filter(fn($ws) => $ws->category_slug !== 'mobile');
-            $specialServices = $websiteServices->filter(fn($ws) => $ws->category_slug === 'mobile');
+        $mainServices = $websiteServices->filter(fn($ws) => $ws->category_slug !== 'mobile');
+        $specialServices = $websiteServices->filter(fn($ws) => $ws->category_slug === 'mobile');
         @endphp
 
         <!-- Primary Hair Style Categories -->
@@ -116,16 +116,16 @@
                     @endif
 
                     @php
-                        $btnUrl = $ws->button_link;
-                        if (empty($btnUrl)) {
-                            $btnUrl = route('booking');
-                        } elseif (str_starts_with($btnUrl, 'http://') || str_starts_with($btnUrl, 'https://')) {
-                            // full url
-                        } elseif (str_starts_with($btnUrl, '/')) {
-                            $btnUrl = url($btnUrl);
-                        } else {
-                            $btnUrl = route('booking') . '?service=' . urlencode($btnUrl);
-                        }
+                    $btnUrl = $ws->button_link;
+                    if (empty($btnUrl)) {
+                    $btnUrl = route('booking');
+                    } elseif (str_starts_with($btnUrl, 'http://') || str_starts_with($btnUrl, 'https://')) {
+                    // full url
+                    } elseif (str_starts_with($btnUrl, '/')) {
+                    $btnUrl = url($btnUrl);
+                    } else {
+                    $btnUrl = route('booking') . '?service=' . urlencode($btnUrl);
+                    }
                     @endphp
 
                     <div class="service-card-footer">
@@ -152,16 +152,16 @@
             <div class="special-services-grid">
                 @foreach($specialServices as $ss)
                 @php
-                    $btnUrl = $ss->button_link;
-                    if (empty($btnUrl)) {
-                        $btnUrl = route('booking');
-                    } elseif (str_starts_with($btnUrl, 'http://') || str_starts_with($btnUrl, 'https://')) {
-                        // full url
-                    } elseif (str_starts_with($btnUrl, '/')) {
-                        $btnUrl = url($btnUrl);
-                    } else {
-                        $btnUrl = route('booking') . '?service=' . urlencode($btnUrl);
-                    }
+                $btnUrl = $ss->button_link;
+                if (empty($btnUrl)) {
+                $btnUrl = route('booking');
+                } elseif (str_starts_with($btnUrl, 'http://') || str_starts_with($btnUrl, 'https://')) {
+                // full url
+                } elseif (str_starts_with($btnUrl, '/')) {
+                $btnUrl = url($btnUrl);
+                } else {
+                $btnUrl = route('booking') . '?service=' . urlencode($btnUrl);
+                }
                 @endphp
                 <div class="special-service-card">
                     <div class="special-card-glow"></div>
@@ -237,7 +237,7 @@
             <div class="flow-step-card">
                 <div class="flow-step-number">2</div>
                 <h4>Choose Date & Location</h4>
-                <p>Pick your date and decide whether you want a studio visit, home service in Luton, or a travel appointment.</p>
+                <p>Pick your date and decide whether you want a home salon, home service in Luton, or a travel appointment.</p>
             </div>
 
             <div class="flow-step-card">

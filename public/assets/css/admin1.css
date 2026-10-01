@@ -760,3 +760,506 @@ nav[role="navigation"] svg {
         display: flex;
     }
 }
+
+/* ==========================================================================
+   APPOINTMENT CALENDAR & SCHEDULE OVERVIEW STYLES
+   ========================================================================== */
+.cal-main-layout {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 24px;
+    align-items: start;
+}
+
+@media (max-width: 1100px) {
+    .cal-main-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+.cal-header-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--adm-border);
+}
+
+.cal-month-nav {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.cal-current-title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--adm-primary);
+    min-width: 170px;
+    text-align: center;
+    margin: 0;
+}
+
+.cal-nav-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: #F1F5F9;
+    color: var(--adm-primary);
+    border: 1px solid var(--adm-border);
+    transition: all 0.2s ease;
+    text-decoration: none;
+}
+
+.cal-nav-btn:hover {
+    background: var(--adm-primary);
+    color: #FFFFFF;
+    border-color: var(--adm-primary);
+    transform: translateY(-1px);
+}
+
+.cal-today-btn {
+    padding: 6px 14px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 8px;
+    background: var(--adm-accent-soft);
+    color: var(--adm-accent-dark);
+    border: 1px solid rgba(56, 189, 248, 0.4);
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.cal-today-btn:hover {
+    background: var(--adm-accent-dark);
+    color: #FFFFFF;
+}
+
+.cal-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.cal-grid-wrapper {
+    padding: 0;
+    overflow-x: auto;
+}
+
+.cal-weekdays-row {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    background: #F8FAFC;
+    border-bottom: 1px solid var(--adm-border);
+}
+
+.cal-weekday {
+    padding: 12px 8px;
+    text-align: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--adm-text-muted);
+}
+
+.cal-weekday.weekend {
+    color: var(--adm-gold);
+}
+
+.cal-month-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    background: var(--adm-border);
+    gap: 1px;
+}
+
+.cal-day-cell {
+    min-height: 128px;
+    background: #FFFFFF;
+    padding: 10px 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    transition: background 0.15s ease;
+    position: relative;
+}
+
+.cal-day-cell.is-padding {
+    background: #F8FAFC;
+    opacity: 0.5;
+}
+
+.cal-day-cell.is-weekend {
+    background: #FCFDFE;
+}
+
+.cal-day-cell.is-today {
+    background: #F0F9FF;
+    border: 1.5px solid var(--adm-accent);
+}
+
+.cal-day-cell.is-past {
+    opacity: 0.88;
+}
+
+.cal-day-cell.is-blocked {
+    background: #FFF5F5;
+    border-left: 3px solid var(--adm-danger);
+}
+
+.cal-cell-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cal-day-number {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--adm-text-main);
+    width: 26px;
+    height: 26px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.cal-day-number.today-pill {
+    background: var(--adm-primary);
+    color: #FFFFFF;
+    box-shadow: 0 2px 6px rgba(39, 24, 117, 0.3);
+}
+
+.cal-cell-quick-actions {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.cal-day-cell:hover .cal-cell-quick-actions {
+    opacity: 1;
+}
+
+.cal-action-icon-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--adm-text-muted);
+    padding: 2px 4px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.cal-action-icon-btn:hover {
+    background: #E2E8F0;
+    color: var(--adm-danger);
+}
+
+.cal-action-icon-btn.text-danger {
+    color: var(--adm-danger);
+}
+
+.cal-blocked-tag {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 6px;
+    background: #FEE2E2;
+    color: #991B1B;
+    border-radius: 6px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    margin-bottom: 2px;
+}
+
+.cal-events-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    overflow-y: auto;
+    max-height: 140px;
+}
+
+.cal-event-chip {
+    padding: 5px 7px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    border-left: 3px solid transparent;
+    line-height: 1.25;
+}
+
+.cal-event-chip:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.cal-event-chip.evt-confirmed {
+    background: #EFF6FF;
+    border-left-color: #2563EB;
+    color: #1E40AF;
+}
+
+.cal-event-chip.evt-pending {
+    background: #FEF3C7;
+    border-left-color: #D97706;
+    color: #92400E;
+}
+
+.cal-event-chip.evt-completed {
+    background: #ECFDF5;
+    border-left-color: #059669;
+    color: #065F46;
+}
+
+.cal-event-chip.evt-cancelled {
+    background: #F1F5F9;
+    border-left-color: #94A3B8;
+    color: #64748B;
+    text-decoration: line-through;
+}
+
+.cal-event-chip.evt-overnight {
+    background: #F3E8FF;
+    border-left-color: #7E22CE;
+    color: #581C87;
+    font-weight: 600;
+}
+
+.event-chip-time {
+    font-weight: 700;
+    font-size: 0.72rem;
+    margin-bottom: 1px;
+}
+
+.event-chip-title {
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.event-chip-sub {
+    font-size: 0.68rem;
+    opacity: 0.85;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cal-legend-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 14px 24px;
+    background: #FAFBFD;
+    border-top: 1px solid var(--adm-border);
+    font-size: 0.78rem;
+    color: var(--adm-text-muted);
+}
+
+.cal-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 3px;
+    display: inline-block;
+}
+
+.dot-confirmed { background: #2563EB; }
+.dot-pending { background: #D97706; }
+.dot-overnight { background: #7E22CE; }
+.dot-blocked { background: #EF4444; }
+
+/* Blocked Dates Sidebar List */
+.cal-blocked-list {
+    max-height: 480px;
+    overflow-y: auto;
+}
+
+.cal-blocked-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--adm-border);
+    transition: background 0.15s ease;
+}
+
+.cal-blocked-item:hover {
+    background: #FAFBFD;
+}
+
+.blocked-item-date {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--adm-primary);
+}
+
+.blocked-item-reason {
+    font-size: 0.78rem;
+    color: var(--adm-danger);
+    font-weight: 600;
+    margin-top: 2px;
+}
+
+.blocked-item-notes {
+    font-size: 0.72rem;
+    color: var(--adm-text-muted);
+    font-style: italic;
+    margin-top: 2px;
+}
+
+.btn-remove-blocked {
+    background: #FEE2E2;
+    color: #DC2626;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-remove-blocked:hover {
+    background: #DC2626;
+    color: #FFFFFF;
+}
+
+/* Modals */
+.cal-modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(4px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+}
+
+.cal-modal-box {
+    background: #FFFFFF;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 520px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    animation: calModalFadeIn 0.25s ease-out;
+}
+
+@keyframes calModalFadeIn {
+    from { opacity: 0; transform: translateY(12px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.cal-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--adm-border);
+    background: #FAFBFD;
+    border-radius: 16px 16px 0 0;
+}
+
+.modal-pill-tag {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    background: var(--adm-accent-soft);
+    color: var(--adm-primary);
+    margin-bottom: 4px;
+}
+
+.modal-pill-tag.tag-danger {
+    background: #FEE2E2;
+    color: #DC2626;
+}
+
+.cal-modal-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--adm-primary);
+    margin: 0;
+}
+
+.cal-modal-close {
+    background: none;
+    border: none;
+    font-size: 1.6rem;
+    line-height: 1;
+    color: var(--adm-text-muted);
+    cursor: pointer;
+    transition: color 0.15s ease;
+}
+
+.cal-modal-close:hover {
+    color: var(--adm-danger);
+}
+
+.cal-modal-body {
+    padding: 20px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.modal-detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.modal-detail-row {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.modal-detail-row .detail-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--adm-text-muted);
+}
+
+.modal-detail-row .detail-value {
+    font-size: 0.92rem;
+    color: var(--adm-text-main);
+}
+
+.cal-modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 16px 24px;
+    border-top: 1px solid var(--adm-border);
+    background: #FAFBFD;
+    border-radius: 0 0 16px 16px;
+}

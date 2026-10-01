@@ -1,5 +1,3 @@
-/* ThriveCity Studio - Place Order Page - Professional Design */
-
 /* CSS Reset and Base Styles */
 * {
     margin: 0;
@@ -129,8 +127,8 @@ body {
     pointer-events: none;
 }
 
-.product-option input[type="radio"]:checked + .radio-label + .product-card,
-.product-option input[type="radio"]:checked ~ .product-card {
+.product-option input[type="radio"]:checked+.radio-label+.product-card,
+.product-option input[type="radio"]:checked~.product-card {
     border-color: var(--primary-purple);
     background-color: var(--light-cream);
 }
@@ -167,12 +165,12 @@ body {
     transition: all 0.3s ease;
 }
 
-.product-option input[type="radio"]:checked + .radio-label {
+.product-option input[type="radio"]:checked+.radio-label {
     border-color: var(--primary-purple);
     background-color: var(--primary-purple);
 }
 
-.product-option input[type="radio"]:checked + .radio-label::after {
+.product-option input[type="radio"]:checked+.radio-label::after {
     content: '';
     position: absolute;
     top: 50%;
@@ -214,7 +212,7 @@ body {
     box-shadow: var(--shadow-light);
 }
 
-.type-option input[type="radio"]:checked ~ .type-card {
+.type-option input[type="radio"]:checked~.type-card {
     border-color: var(--primary-purple);
     background-color: var(--light-cream);
 }
@@ -267,7 +265,7 @@ body {
     border-color: var(--primary-purple);
 }
 
-.size-option input[type="radio"]:checked + .size-label {
+.size-option input[type="radio"]:checked+.size-label {
     border-color: var(--primary-purple);
     background-color: var(--primary-purple);
     color: var(--white);
@@ -303,7 +301,7 @@ body {
     border: 3px solid transparent;
 }
 
-.color-option input[type="radio"]:checked + .color-label {
+.color-option input[type="radio"]:checked+.color-label {
     border-color: var(--primary-purple);
     transform: scale(1.1);
 }
@@ -346,7 +344,7 @@ body {
     pointer-events: none;
 }
 
-.placement-option input[type="checkbox"]:checked ~ .placement-card {
+.placement-option input[type="checkbox"]:checked~.placement-card {
     border-color: var(--primary-purple);
     background-color: var(--light-cream);
 }
@@ -380,18 +378,55 @@ body {
 }
 
 @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
 }
 
 /* Placement positions */
-.front-chest { top: 20px; left: 15px; }
-.pocket { top: 25px; right: 15px; }
-.back-center { top: 30px; left: 50%; transform: translateX(-50%); }
-.right-sleeve-upper { top: 15px; right: -5px; }
-.left-sleeve-lower { bottom: 30px; left: -5px; }
-.front-center { top: 40px; left: 50%; transform: translateX(-50%); }
-.front-bottom { bottom: 10px; left: 50%; transform: translateX(-50%); }
+.front-chest {
+    top: 20px;
+    left: 15px;
+}
+
+.pocket {
+    top: 25px;
+    right: 15px;
+}
+
+.back-center {
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.right-sleeve-upper {
+    top: 15px;
+    right: -5px;
+}
+
+.left-sleeve-lower {
+    bottom: 30px;
+    left: -5px;
+}
+
+.front-center {
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.front-bottom {
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
 
 .placement-card h3 {
     font-family: "Space Grotesk", sans-serif;
@@ -419,12 +454,12 @@ body {
     transition: all 0.3s ease;
 }
 
-.placement-option input[type="checkbox"]:checked + .checkbox-label {
+.placement-option input[type="checkbox"]:checked+.checkbox-label {
     border-color: var(--primary-purple);
     background-color: var(--primary-purple);
 }
 
-.placement-option input[type="checkbox"]:checked + .checkbox-label::after {
+.placement-option input[type="checkbox"]:checked+.checkbox-label::after {
     content: '✓';
     position: absolute;
     top: 50%;

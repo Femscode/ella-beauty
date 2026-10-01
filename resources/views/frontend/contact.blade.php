@@ -1,6 +1,6 @@
 @extends('frontend.master')
 
-@section('title', 'Contact Ella Beauty | Mobile Braiding & Studio Inquiries')
+@section('title', 'Contact Ella Beauty | Mobile Braiding & Home Salon Inquiries')
 
 @section('header')
 <link rel="stylesheet" href="{{ asset('assets/css/contact1.css') }}?v={{ time() }}">

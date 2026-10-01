@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'ThriveCity Studio') }} – Admin</title>
+    <title>{{ config('app.name', 'Ella Beauty Studio') }} – Admin</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -14,8 +14,8 @@
 
     <!-- <script src="https://cdn.tailwindcss.com"></script> -->
     <!-- Vite assets (Tailwind + App JS) -->
-<link rel="icon" href="{{ url('assets/images/logo.jpeg') }}" type="image/jpeg">
-    
+    <link rel="icon" href="{{ url('assets/images/logo.jpeg') }}" type="image/jpeg">
+
     <link rel="stylesheet" href="{{ url('assets/css/app1.css') }}?v={{ time() }}">
     <link rel="stylesheet" href="{{ url('assets/css/tailwind1.css') }}?v={{ time() }}">
     <script src="{{ url('assets/js/app.js') }}"></script>
@@ -35,7 +35,7 @@
             <div class="h-16 flex items-center px-6 border-b border-white/20">
                 <a href="{{ route('dashboard') }}" class="flex items-center gap-3">
                     <img width="34" height="34" class="rounded-full object-cover border border-sky-400" src="{{ url('assets/images/logo.jpeg') }}" alt="Ella Beauty">
-    
+
                     <span class="font-semibold text-lg">Ella Admin</span>
                 </a>
             </div>
@@ -104,7 +104,7 @@
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
                     @csrf
                 </form>
-               
+
             </nav>
         </aside>
 
@@ -115,9 +115,9 @@
                 <div class="flex items-center justify-between px-4 sm:px-6 lg:px-8 h-16">
                     <div class="flex items-center gap-3">
                         @hasSection('header')
-                            <div class="text-slate-800 font-semibold text-lg">@yield('header')</div>
+                        <div class="text-slate-800 font-semibold text-lg">@yield('header')</div>
                         @else
-                            <div class="text-slate-800 font-semibold text-lg">Admin</div>
+                        <div class="text-slate-800 font-semibold text-lg">Admin</div>
                         @endif
                     </div>
                     <div class="flex items-center gap-3">
@@ -125,12 +125,16 @@
                             <div class="relative">
                                 <input type="text" placeholder="Search..." class="w-64 rounded-md border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-violet-500" />
                                 <span class="absolute right-2 top-2.5 text-slate-400">
-                                    <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M11 18a7 7 0 100-14 7 7 0 000 14z"/></svg>
+                                    <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M11 18a7 7 0 100-14 7 7 0 000 14z" />
+                                    </svg>
                                 </span>
                             </div>
                         </div>
                         <button id="sidebarToggle" class="md:hidden inline-flex items-center justify-center rounded-md p-2 text-slate-700 hover:bg-slate-100 focus:outline-none" aria-label="Toggle sidebar">
-                            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                            </svg>
                         </button>
                     </div>
                 </div>
@@ -153,11 +157,13 @@
             const sidebar = document.getElementById('adminSidebar');
             const overlay = document.getElementById('sidebarOverlay');
             if (!toggleBtn || !sidebar || !overlay) return;
+
             function openSidebar() {
                 sidebar.classList.remove('-translate-x-full');
                 overlay.classList.remove('hidden');
                 toggleBtn.setAttribute('aria-expanded', 'true');
             }
+
             function closeSidebar() {
                 sidebar.classList.add('-translate-x-full');
                 overlay.classList.add('hidden');

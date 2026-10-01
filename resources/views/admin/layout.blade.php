@@ -25,7 +25,7 @@
             <div class="adm-brand-logo">EB</div>
             <div class="adm-brand-text">
                 <h2>Ella Beauty</h2>
-                <span>Studio & Mobile</span>
+                <span>Home Salon</span>
             </div>
         </div>
 
@@ -42,14 +42,27 @@
             </a>
 
             <div class="adm-nav-heading">Appointments</div>
-            <a href="{{ route('admin.bookings.index') }}" class="adm-nav-link {{ request()->routeIs('admin.bookings*') ? 'active' : '' }}">
+            <a href="{{ route('admin.appointments.index') }}" class="adm-nav-link {{ request()->routeIs('admin.appointments*') ? 'active' : '' }}">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
                     <line x1="16" y1="2" x2="16" y2="6"></line>
                     <line x1="8" y1="2" x2="8" y2="6"></line>
                     <line x1="3" y1="10" x2="21" y2="10"></line>
+                    <circle cx="8" cy="15" r="1" fill="currentColor"></circle>
+                    <circle cx="12" cy="15" r="1" fill="currentColor"></circle>
+                    <circle cx="16" cy="15" r="1" fill="currentColor"></circle>
                 </svg>
-                <span>Bookings</span>
+                <span>Calendar & Schedule</span>
+            </a>
+            <a href="{{ route('admin.bookings.index') }}" class="adm-nav-link {{ request()->routeIs('admin.bookings*') ? 'active' : '' }}">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                    <polyline points="10 9 9 9 8 9"></polyline>
+                </svg>
+                <span>All Bookings</span>
                 @php $pCount = \App\Models\Booking::where('status', 'pending')->count(); @endphp
                 @if($pCount > 0)
                 <span class="adm-badge adm-badge-warning">{{ $pCount }}</span>

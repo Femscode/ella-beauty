@@ -39,9 +39,9 @@
                     <select id="serviceSelect" name="service_id" class="adm-form-control">
                         <option value="">-- Choose from Catalog or Type Below --</option>
                         @foreach($services as $serv)
-                            <option value="{{ $serv->id }}" data-price="{{ $serv->price }}" data-name="{{ $serv->name }}">
-                                {{ $serv->name }} (£{{ number_format($serv->price, 2) }})
-                            </option>
+                        <option value="{{ $serv->id }}" data-price="{{ $serv->price }}" data-name="{{ $serv->name }}">
+                            {{ $serv->name }} (£{{ number_format($serv->price, 2) }})
+                        </option>
                         @endforeach
                     </select>
                 </div>
@@ -85,7 +85,7 @@
                     <select name="service_location_type" class="adm-form-control" required>
                         <option value="mobile_home">Mobile / Home Service (Luton)</option>
                         <option value="travel">Travel Appointment (Selected locations)</option>
-                        <option value="salon_studio">Studio / Host Location</option>
+                        <option value="salon_studio">Home Salon</option>
                     </select>
                 </div>
             </div>

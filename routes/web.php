@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AppointmentScheduleController;
 use App\Http\Controllers\Admin\BookingController as AdminBookingController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
@@ -43,6 +44,11 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     // Dashboard
     Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard.main');
+
+    // Appointments & Schedule Calendar
+    Route::get('/appointments', [AppointmentScheduleController::class, 'index'])->name('appointments.index');
+    Route::post('/appointments/unavailable', [AppointmentScheduleController::class, 'storeUnavailable'])->name('appointments.unavailable.store');
+    Route::delete('/appointments/unavailable/{unavailableDate}', [AppointmentScheduleController::class, 'destroyUnavailable'])->name('appointments.unavailable.destroy');
 
     // Bookings
     Route::get('/bookings', [AdminBookingController::class, 'index'])->name('bookings.index');

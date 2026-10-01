@@ -1,5 +1,3 @@
-/* ThriveCity Studio - Portfolio Page Styles */
-
 :root {
     --primary-purple: #271875;
     --secondary-purple: #3B82F6;
@@ -321,70 +319,70 @@
     .portfolio-hero {
         padding: 80px 0 60px;
     }
-    
+
     .portfolio-hero-title {
         font-size: 2.5rem;
     }
-    
+
     .portfolio-hero-subtitle {
         font-size: 1.125rem;
     }
-    
+
     .portfolio-grid {
         grid-template-columns: 1fr;
         gap: 1.5rem;
     }
-    
+
     .portfolio-card {
         margin: 0 auto;
         max-width: 400px;
     }
-    
+
     .portfolio-image {
         height: 250px;
     }
-    
+
     .filter-tabs {
         gap: 0.5rem;
     }
-    
+
     .filter-btn {
         padding: 0.6rem 1.2rem;
         font-size: 0.9rem;
     }
-    
+
     .stats-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 1.5rem;
     }
-    
+
     .stat-number {
         font-size: 2.5rem;
     }
-    
+
     .cta-content h2 {
         font-size: 2rem;
     }
-    
+
     .cta-buttons {
         flex-direction: column;
         align-items: center;
     }
-    
+
     .btn-primary,
     .btn-secondary {
         width: 100%;
         max-width: 300px;
     }
-    
+
     .portfolio-overlay {
         padding: 1.5rem;
     }
-    
+
     .portfolio-overlay-content h3 {
         font-size: 1.25rem;
     }
-    
+
     .portfolio-overlay-content p {
         font-size: 0.9rem;
     }
@@ -394,56 +392,56 @@
     .portfolio-container {
         padding: 0 15px;
     }
-    
+
     .portfolio-hero-title {
         font-size: 2rem;
     }
-    
+
     .portfolio-grid {
         gap: 1rem;
     }
-    
+
     .portfolio-card {
         max-width: 100%;
     }
-    
+
     .portfolio-image {
         height: 200px;
     }
-    
+
     .filter-tabs {
         justify-content: center;
     }
-    
+
     .filter-btn {
         padding: 0.5rem 1rem;
         font-size: 0.85rem;
     }
-    
+
     .stats-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .stat-item {
         padding: 1.5rem;
     }
-    
+
     .stat-number {
         font-size: 2rem;
     }
-    
+
     .cta-content h2 {
         font-size: 1.75rem;
     }
-    
+
     .portfolio-overlay {
         padding: 1rem;
     }
-    
+
     .portfolio-tags {
         gap: 0.25rem;
     }
-    
+
     .tag {
         padding: 0.2rem 0.6rem;
         font-size: 0.75rem;
@@ -456,6 +454,7 @@
         opacity: 0;
         transform: translateY(30px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -466,22 +465,62 @@
     animation: fadeInUp 0.6s ease forwards;
 }
 
-.portfolio-item:nth-child(1) { animation-delay: 0.1s; }
-.portfolio-item:nth-child(2) { animation-delay: 0.2s; }
-.portfolio-item:nth-child(3) { animation-delay: 0.3s; }
-.portfolio-item:nth-child(4) { animation-delay: 0.4s; }
-.portfolio-item:nth-child(5) { animation-delay: 0.5s; }
-.portfolio-item:nth-child(6) { animation-delay: 0.6s; }
-.portfolio-item:nth-child(7) { animation-delay: 0.7s; }
-.portfolio-item:nth-child(8) { animation-delay: 0.8s; }
-.portfolio-item:nth-child(9) { animation-delay: 0.9s; }
-.portfolio-item:nth-child(10) { animation-delay: 1.0s; }
+.portfolio-item:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.portfolio-item:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.portfolio-item:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.portfolio-item:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+.portfolio-item:nth-child(5) {
+    animation-delay: 0.5s;
+}
+
+.portfolio-item:nth-child(6) {
+    animation-delay: 0.6s;
+}
+
+.portfolio-item:nth-child(7) {
+    animation-delay: 0.7s;
+}
+
+.portfolio-item:nth-child(8) {
+    animation-delay: 0.8s;
+}
+
+.portfolio-item:nth-child(9) {
+    animation-delay: 0.9s;
+}
+
+.portfolio-item:nth-child(10) {
+    animation-delay: 1.0s;
+}
 
 .stat-item {
     animation: fadeInUp 0.6s ease forwards;
 }
 
-.stat-item:nth-child(1) { animation-delay: 0.2s; }
-.stat-item:nth-child(2) { animation-delay: 0.4s; }
-.stat-item:nth-child(3) { animation-delay: 0.6s; }
-.stat-item:nth-child(4) { animation-delay: 0.8s; }
+.stat-item:nth-child(1) {
+    animation-delay: 0.2s;
+}
+
+.stat-item:nth-child(2) {
+    animation-delay: 0.4s;
+}
+
+.stat-item:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+.stat-item:nth-child(4) {
+    animation-delay: 0.8s;
+}

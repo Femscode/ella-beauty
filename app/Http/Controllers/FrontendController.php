@@ -10,6 +10,7 @@ use App\Models\Review;
 use App\Models\Service;
 use App\Models\ServiceCategory;
 use App\Models\Setting;
+use App\Models\UnavailableDate;
 use App\Models\WebsiteService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -52,7 +53,12 @@ class FrontendController extends Controller
         $selectedServiceId = $request->query('service_id');
         $selectedService = $selectedServiceId ? Service::find($selectedServiceId) : null;
 
-        return view('frontend.booking', compact('categories', 'selectedService'));
+        $unavailableDates = UnavailableDate::whereDate('date', '>=', today())
+            ->pluck('date')
+            ->map(fn($d) => is_string($d) ? substr($d, 0, 10) : $d->format('Y-m-d'))
+            ->toArray();
+
+        return view('frontend.booking', compact('categories', 'selectedService', 'unavailableDates'));
     }
 
     public function storeBooking(Request $request)
@@ -77,6 +83,11 @@ class FrontendController extends Controller
             'client_notes' => 'nullable|string|max:1000',
             'policies_agreed' => 'required|accepted',
         ]);
+
+        // Check if selected date is blocked
+        if (UnavailableDate::whereDate('date', $validated['appointment_date'])->exists()) {
+            return back()->withErrors(['appointment_date' => 'The selected date is blocked by the salon and unavailable for bookings. Please choose another date.'])->withInput();
+        }
 
         $service = null;
         if (!empty($validated['service_id'])) {

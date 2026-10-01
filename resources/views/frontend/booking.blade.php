@@ -66,7 +66,7 @@
                     <input type="hidden" name="service_id" id="hiddenServiceId" value="">
                     <input type="hidden" name="service_name" id="hiddenServiceName" value="">
                     <input type="hidden" name="total_price" id="hiddenTotalPrice" value="0">
-                    <input type="hidden" name="appointment_time" id="selectedDedicatedTime" value="09:30 AM">
+                    <input type="hidden" name="appointment_time" id="selectedDedicatedTime" value="10:00 AM">
 
                     <!-- 1. Hairstyle Selection -->
                     <div class="booking-field-group">
@@ -127,6 +127,7 @@
                             <div class="pricing-chip-item">
                                 <span class="chip-label">Total Price</span>
                                 <strong class="chip-value" id="summaryTotalPrice">£140.00</strong>
+                                <div id="overnightSummaryBadge" style="display: none;" class="overnight-fee-pill">🌙 Includes +£100 Overnight Fee</div>
                             </div>
                             <div class="pricing-chip-item highlight-deposit">
                                 <span class="chip-label">30% Deposit Due</span>
@@ -160,7 +161,7 @@
                         <div class="booking-field-group">
                             <label class="booking-input-label" for="bookLocation">2. Service Location *</label>
                             <select id="bookLocation" name="service_location_type" class="booking-select-control" required>
-                                <option value="salon_studio">Salon Studio (Luton)</option>
+                                <option value="salon_studio">Home Salon (Luton)</option>
                                 <option value="mobile_home">Mobile Braiding / Home Service (Luton & Local)</option>
                                 <option value="travel">Travel Appointment (Selected Locations)</option>
                             </select>
@@ -179,18 +180,33 @@
                     <!-- 3. Date & Time Selection -->
                     <div class="booking-field-group">
                         <label class="booking-input-label" for="bookDate">4. Preferred Appointment Date *</label>
-                        <input type="date" id="bookDate" name="appointment_date" class="booking-input-control" min="{{ date('Y-m-d') }}" required>
+                        <input type="date" id="bookDate" name="appointment_date" class="booking-input-control" min="{{ date('Y-m-d') }}" required onchange="validateSelectedDate(this)">
+                        <div id="dateBlockedAlert" style="display: none; margin-top: 8px; padding: 10px 14px; background: #FEE2E2; color: #991B1B; border-radius: 8px; font-size: 0.85rem; font-weight: 600;">
+                            ⛔ This date is marked as unavailable. Please select another date.
+                        </div>
                     </div>
 
                     <div class="booking-field-group">
                         <label class="booking-input-label">5. Select Preferred Time Slot *</label>
                         <div class="booking-time-grid">
-                            <div class="booking-time-chip active" onclick="selectDedicatedTime(this, '09:30 AM')">09:30 AM</div>
-                            <div class="booking-time-chip" onclick="selectDedicatedTime(this, '11:45 AM')">11:45 AM</div>
-                            <div class="booking-time-chip" onclick="selectDedicatedTime(this, '02:00 PM')">02:00 PM</div>
-                            <div class="booking-time-chip" onclick="selectDedicatedTime(this, '04:30 PM')">04:30 PM</div>
-                            <div class="booking-time-chip" onclick="selectDedicatedTime(this, '06:00 PM')">06:00 PM</div>
+                            <div class="booking-time-chip active" id="chip_10am" onclick="selectDedicatedTime(this, '10:00 AM')">
+                                <span class="time-main">10:00 AM</span>
+                                <span class="time-sub">Standard / All Styles</span>
+                            </div>
+                            <div class="booking-time-chip" id="chip_12pm" onclick="selectDedicatedTime(this, '12:00 PM')">
+                                <span class="time-main">12:00 PM</span>
+                                <span class="time-sub">Short Styles (&le; 4.5 hrs)</span>
+                            </div>
+                            <div class="booking-time-chip" id="chip_02pm" onclick="selectDedicatedTime(this, '02:00 PM')">
+                                <span class="time-main">2:00 PM</span>
+                                <span class="time-sub">Quick Styles (&le; 3.5 hrs)</span>
+                            </div>
+                            <div class="booking-time-chip overnight-chip" id="chip_overnight" onclick="selectDedicatedTime(this, '06:00 PM (Overnight Booking)')">
+                                <span class="time-main">🌙 Overnight (6:00 PM)</span>
+                                <span class="time-sub overnight-badge">+£100 Fee</span>
+                            </div>
                         </div>
+                        <div id="slotNotice" class="slot-restriction-notice" style="display: none;"></div>
                     </div>
 
                     <!-- 4. Client Details -->
@@ -1333,8 +1349,31 @@
     let currentCategoryName = 'Ella Beauty';
     let currentStyleName = 'Hairstyle Inspiration';
     let activeLightboxIndex = 0;
+    const blockedDates = @json($unavailableDates ?? []);
 
-    // Update live price breakdown and category lookbook photos whenever hairstyle is selected
+    // Validate selected appointment date against blocked dates
+    function validateSelectedDate(input) {
+        const alertEl = document.getElementById('dateBlockedAlert');
+        if (!input || !input.value) {
+            if (alertEl) alertEl.style.display = 'none';
+            return true;
+        }
+
+        if (blockedDates.includes(input.value)) {
+            if (alertEl) {
+                alertEl.style.display = 'block';
+                alertEl.textContent = `⛔ ${input.value} is marked as unavailable by the salon. Please choose another date.`;
+            }
+            input.style.borderColor = '#EF4444';
+            return false;
+        } else {
+            if (alertEl) alertEl.style.display = 'none';
+            input.style.borderColor = '';
+            return true;
+        }
+    }
+
+    // Update live price breakdown, duration slot restrictions, and lookbook preview
     function updatePriceCalculation() {
         const selectEl = document.getElementById('bookHairstyle');
         const selectedOption = selectEl.options[selectEl.selectedIndex];
@@ -1347,7 +1386,7 @@
             return;
         }
 
-        const price = parseFloat(selectedOption.dataset.price);
+        const basePrice = parseFloat(selectedOption.dataset.price);
         const duration = selectedOption.dataset.time || '';
         const extNote = selectedOption.dataset.ext || '';
         const styleName = selectedOption.dataset.name || selectedOption.text.split('(')[0].trim();
@@ -1356,8 +1395,66 @@
         currentCategoryName = categoryName;
         currentStyleName = styleName;
 
-        const deposit = (price * 0.3).toFixed(2);
-        const balance = (price * 0.7).toFixed(2);
+        // Parse numerical hours from duration string (e.g. "7 hours", "4.5 hrs", "5 hours")
+        let durationHours = 0;
+        const durMatch = duration.match(/([\d\.]+)/);
+        if (durMatch) {
+            durationHours = parseFloat(durMatch[1]);
+        }
+
+        const chip10am = document.getElementById('chip_10am');
+        const chip12pm = document.getElementById('chip_12pm');
+        const chip02pm = document.getElementById('chip_02pm');
+        const chipOvernight = document.getElementById('chip_overnight');
+        const slotNotice = document.getElementById('slotNotice');
+        const selectedTimeInput = document.getElementById('selectedDedicatedTime');
+        let currentSelectedTime = selectedTimeInput ? selectedTimeInput.value : '10:00 AM';
+
+        // Slot Restriction Rules based on style duration:
+        // - Duration > 4.5 hours (e.g. 5, 7, 8, 10 hrs): Only 10:00 AM & Overnight (6 PM) allowed
+        // - Duration > 3.5 & <= 4.5 hours: 10:00 AM, 12:00 PM, and Overnight allowed
+        // - Duration <= 3.5 hours: All slots allowed (10 AM, 12 PM, 2 PM, Overnight)
+        if (durationHours > 4.5) {
+            if (chip12pm) chip12pm.classList.add('disabled-slot');
+            if (chip02pm) chip02pm.classList.add('disabled-slot');
+
+            if (currentSelectedTime === '12:00 PM' || currentSelectedTime === '02:00 PM') {
+                if (chip10am) selectDedicatedTime(chip10am, '10:00 AM');
+                currentSelectedTime = '10:00 AM';
+            }
+
+            if (slotNotice) {
+                slotNotice.style.display = 'block';
+                slotNotice.innerHTML = `ℹ️ <strong>10:00 AM</strong> is the standard daytime slot for ${styleName} (${duration}). 12:00 PM & 2:00 PM are reserved for quick styles (&le; 4.5 hrs). Overnight booking (6:00 PM) is available for +£100 fee.`;
+            }
+        } else if (durationHours > 3.5 && durationHours <= 4.5) {
+            if (chip12pm) chip12pm.classList.remove('disabled-slot');
+            if (chip02pm) chip02pm.classList.add('disabled-slot');
+
+            if (currentSelectedTime === '02:00 PM') {
+                if (chip12pm) selectDedicatedTime(chip12pm, '12:00 PM');
+                currentSelectedTime = '12:00 PM';
+            }
+
+            if (slotNotice) {
+                slotNotice.style.display = 'block';
+                slotNotice.innerHTML = `ℹ️ <strong>10:00 AM</strong> and <strong>12:00 PM</strong> are available for this style (${duration}). 2:00 PM is reserved for shorter styles (&le; 3.5 hrs).`;
+            }
+        } else {
+            if (chip12pm) chip12pm.classList.remove('disabled-slot');
+            if (chip02pm) chip02pm.classList.remove('disabled-slot');
+            if (slotNotice) {
+                slotNotice.style.display = 'none';
+            }
+        }
+
+        // Check if Overnight slot is selected (adds +£20 fee)
+        const isOvernight = (currentSelectedTime.includes('Overnight') || currentSelectedTime.includes('06:00 PM'));
+        const overnightFee = isOvernight ? 20.00 : 0.00;
+        const totalPrice = basePrice + overnightFee;
+
+        const deposit = (totalPrice * 0.3).toFixed(2);
+        const balance = (totalPrice * 0.7).toFixed(2);
 
         // Update hidden form inputs for backend processing
         if (document.getElementById('hiddenServiceId')) {
@@ -1367,7 +1464,7 @@
             document.getElementById('hiddenServiceName').value = styleName;
         }
         if (document.getElementById('hiddenTotalPrice')) {
-            document.getElementById('hiddenTotalPrice').value = price.toFixed(2);
+            document.getElementById('hiddenTotalPrice').value = totalPrice.toFixed(2);
         }
 
         // Update compact summary card elements
@@ -1376,9 +1473,14 @@
         }
         document.getElementById('summaryStyleName').textContent = styleName;
         document.getElementById('summaryDuration').textContent = `⏱️ ${duration}`;
-        document.getElementById('summaryTotalPrice').textContent = `£${price.toFixed(2)}`;
+        document.getElementById('summaryTotalPrice').textContent = `£${totalPrice.toFixed(2)}`;
         document.getElementById('summaryDepositPrice').textContent = `£${deposit}`;
         document.getElementById('summaryBalancePrice').textContent = `£${balance}`;
+
+        const overnightBadge = document.getElementById('overnightSummaryBadge');
+        if (overnightBadge) {
+            overnightBadge.style.display = isOvernight ? 'inline-flex' : 'none';
+        }
 
         const extNoteEl = document.getElementById('summaryExtensionsNote');
         const extRowEl = document.getElementById('summaryExtensionsNoteRow');
@@ -1395,7 +1497,7 @@
             document.getElementById('depositSectionAmount').textContent = `£${deposit}`;
         }
 
-        // Render Category Lookbook Preview (up to 3 images with click-to-preview lightbox)
+        // Render Category Lookbook Preview (up to 4 images with click-to-preview lightbox)
         const previewWrap = document.getElementById('serviceGalleryPreview');
         const previewGrid = document.getElementById('servicePreviewGrid');
         const countBadge = document.getElementById('galleryPreviewCount');
@@ -1613,12 +1715,33 @@
     }
 
     function selectDedicatedTime(element, timeVal) {
+        if (element.classList.contains('disabled-slot')) {
+            return;
+        }
         document.querySelectorAll('.booking-time-chip').forEach(chip => chip.classList.remove('active'));
         element.classList.add('active');
         document.getElementById('selectedDedicatedTime').value = timeVal;
+        updatePriceCalculation();
     }
 
     document.addEventListener('DOMContentLoaded', () => {
+        // Form submission guard against blocked dates
+        const form = document.getElementById('dedicatedBookingForm');
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                const dateInput = document.getElementById('bookDate');
+                if (!validateSelectedDate(dateInput)) {
+                    e.preventDefault();
+                    dateInput.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center'
+                    });
+                    dateInput.focus();
+                    return false;
+                }
+            });
+        }
+
         const urlParams = new URLSearchParams(window.location.search);
         const serviceParam = urlParams.get('service') || urlParams.get('service_id');
         if (serviceParam) {

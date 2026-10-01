@@ -12,7 +12,7 @@
 <section class="hero-carousel-wrapper" id="heroCarousel">
     <!-- Slide 1: Neat & Beautiful Braiding -->
     <div class="hero-slide active" data-slide-index="0">
-        <img src="{{ url('assets/images/hero1.jpg') }}" alt="Braiding by Ella Beauty" class="hero-bg-img">
+        <img src="{{ url('assets/images/hero1.jpeg') }}" alt="Braiding by Ella Beauty" class="hero-bg-img">
         <div class="hero-overlay-mask"></div>
         <div class="container">
             <div class="hero-slide-content">
@@ -78,7 +78,7 @@
 
     <!-- Slide 4: Gentle Kids Braiding -->
     <div class="hero-slide" data-slide-index="3">
-        <img src="{{ url('assets/images/hero4.jpg') }}" alt="Kids and Family Braiding" class="hero-bg-img">
+        <img src="{{ url('assets/images/kid.jpeg') }}" alt="Kids and Family Braiding" class="hero-bg-img">
         <div class="hero-overlay-mask"></div>
         <div class="container">
             <div class="hero-slide-content">
@@ -831,7 +831,7 @@
             </div>
             <h2 class="vip-title">Ready for Your Next Hairstyle?</h2>
             <p class="vip-text">
-                Experience gentle, neat, and detailed braiding designed to protect your hair and elevate your look. Book an in-studio appointment or reserve a mobile home visit today.
+                Experience gentle, neat, and detailed braiding designed to protect your hair and elevate your look. Book an appointment or reserve a mobile home visit today.
             </p>
             <div class="vip-actions">
                 <button class="btn-vip-book" onclick="openBookingModal()">

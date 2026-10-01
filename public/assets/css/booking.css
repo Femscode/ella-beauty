@@ -603,34 +603,124 @@ input[type="date"].booking-input-control::-webkit-calendar-picker-indicator {
 /* Time Slot Chips */
 .booking-time-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(105px, 1fr));
-    gap: 0.65rem;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 0.75rem;
     margin-top: 0.5rem;
 }
 
-.booking-time-chip {
-    padding: 0.65rem 0.5rem;
-    background: #F8FAFC;
-    border: 1.5px solid #DCE7F6;
-    border-radius: 10px;
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: #334155;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.2s ease;
+@media (max-width: 500px) {
+    .booking-time-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
-.booking-time-chip:hover {
+.booking-time-chip {
+    padding: 0.75rem 0.65rem;
+    background: #F8FAFC;
+    border: 1.5px solid #DCE7F6;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    position: relative;
+}
+
+.booking-time-chip:hover:not(.disabled-slot) {
     border-color: #38BDF8;
-    color: #271875;
+    background: #F0F9FF;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(56, 189, 248, 0.15);
 }
 
 .booking-time-chip.active {
-    background: #271875;
-    color: #FFFFFF;
-    border-color: #271875;
-    box-shadow: 0 4px 12px rgba(39, 24, 117, 0.25);
+    background: linear-gradient(135deg, #160D4A 0%, #271875 100%) !important;
+    color: #FFFFFF !important;
+    border-color: #271875 !important;
+    box-shadow: 0 6px 18px rgba(39, 24, 117, 0.28);
+}
+
+.booking-time-chip.active .time-main,
+.booking-time-chip.active .time-sub {
+    color: #FFFFFF !important;
+}
+
+.booking-time-chip.overnight-chip {
+    border-color: #DDD6FE;
+    background: #FAF5FF;
+}
+
+.booking-time-chip.overnight-chip:hover:not(.disabled-slot) {
+    border-color: #A855F7;
+    background: #F3E8FF;
+}
+
+.booking-time-chip.overnight-chip.active {
+    background: linear-gradient(135deg, #3B0764 0%, #6B21A8 100%) !important;
+    border-color: #6B21A8 !important;
+    box-shadow: 0 6px 20px rgba(107, 33, 168, 0.35);
+}
+
+.booking-time-chip.disabled-slot {
+    opacity: 0.45;
+    background: #F1F5F9 !important;
+    border-color: #E2E8F0 !important;
+    cursor: not-allowed !important;
+    pointer-events: none;
+}
+
+.booking-time-chip .time-main {
+    font-size: 0.88rem;
+    font-weight: 800;
+    color: #160D4A;
+}
+
+.booking-time-chip .time-sub {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #64748B;
+}
+
+.booking-time-chip .overnight-badge {
+    color: #7C3AED;
+    background: #EDE9FE;
+    padding: 1px 6px;
+    border-radius: 999px;
+    font-weight: 700;
+}
+
+.booking-time-chip.active .overnight-badge {
+    background: rgba(255, 255, 255, 0.22);
+    color: #F3E8FF;
+}
+
+.slot-restriction-notice {
+    padding: 8px 12px;
+    background: #FEF3C7;
+    border-left: 3px solid #F59E0B;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #92400E;
+    margin-top: 8px;
+    line-height: 1.4;
+}
+
+.overnight-fee-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: #EDE9FE;
+    color: #6B21A8;
+    padding: 3px 8px;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 800;
+    margin-top: 4px;
 }
 
 /* Terms Checkbox */
